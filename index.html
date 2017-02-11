@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head >
+	<title>cms</title>
+	<meta charset = "utf-8">
+	<link rel="stylesheet" href="lib/amaze/css/amazeui.min.css">
+	<link rel="stylesheet" href="lib/css/index.css"/>
+	<script type="text/javascript" src = "lib/iscroll.js"></script>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="green">
+	<meta name="apple-mobile-web-app-title" content="cms">
+	<meta name="author" content="Bound">
+</head>
+<body>
+	<div class = "loading" style = "width:100%;height:100%;position:fixed;text-align: center;top: 40%;">
+		<img src="lib/images/loading.gif">
+	</div>
+	<div class = "am-animation-fade" style="width:100%">
+		<div ui-view>
+		</div>
+
+	</div>
+	
+	<!-- goTop -->
+	<div data-am-widget="gotop" class="am-gotop am-gotop-fixed gotop" >
+	    <a href="#top">
+	          <i class="am-gotop-icon-custom am-icon-arrow-circle-o-up"></i>
+	    </a>
+	</div>
+
+</body>
+<script data-main="framework/main"  src="lib/require.js" defer async="true"></script>
+</html>

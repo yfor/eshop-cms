@@ -1,0 +1,50 @@
+<div class="header">
+  <div class="am-g">
+    <h1>CMS</h1>
+    <p>Content Management System<br/>产品管理，订单管理，用户管理，信息监控</p>
+  </div>
+  <hr />
+</div>
+
+  <style>
+    .header {
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 200%;
+      color: #333;
+      margin-top: 30px;
+    }
+    .header p {
+      font-size: 14px;
+    }
+  </style>
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+
+
+    <form  class="am-form">
+      <label for="email">用户名:</label>
+      <input type="text"  id="email"  ng-model="currentuser.name">
+      <br>
+      <label for="password">密码:</label>
+      <input type="password"  id="password"  ng-model="currentuser.pw">
+      <br>
+      <label for="remember-me">
+        <input id="remember-me" type="checkbox">
+        记住密码
+      </label>
+      <br />
+      <div class="am-cf">
+        <input  name="" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl" ng-click = "login()">
+      
+      </div>
+    </form>
+    <hr>
+    
+  </div>
+</div>
+<footer  ng-include="'framework/template/footer.html'">
+</footer>
+
+  
