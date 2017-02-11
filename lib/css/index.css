@@ -357,7 +357,18 @@ gallery.html css
 /**/
 .pre{
 	float: left;
+	opacity:0.4;
 }
 .cc{
 	clear: both;
+}
+
+#saveproduct {
+    position: fixed;
+    top: 340px;
+
+    right: 0;
+    z-index: 1500;
+    font-size: 1.4rem;
+    margin-bottom: 0;
 }

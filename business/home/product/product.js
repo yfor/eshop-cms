@@ -86,29 +86,59 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		no_label: false,                // Default: false
 		success_callback: angular.noop          // Default: null
 	  });
-	$scope.createProduct = function(){
+	$scope.uploadPicture= function(category,categoryModelStr){
+		//多图
+		var product = $scope.product;
+		var f = new FormData();
+		var files=product[categoryModelStr];
+		if(!files){
+			alert("请选择"+categoryModelStr)
+			return;
+		}
+		for(var i =0;i< files.length;i++){
+				f.append("document_data[]", files[i]);
+		}
+		//"name"=>"test.png", "remark"=>"remark", "category"=>"1"
+		f.append("name", "test.png");
+		f.append("remark", "remark");
+		f.append("category", category);
+	
+		// "owner_type"=>"Product", "owner_id"=>"2022"
+		f.append("owner_type", "Product");
+		f.append("owner_id", $scope.product.id);
+	
+		var headers=$scope.users.setheaders
+		headers["Content-Type"]=undefined;
 		
+		$http.post("http://116.62.6.81"+"/api/v1/images", f, {
+			  transformRequest: angular.identity,
+			  headers: headers
+		   })
 		
+		   .success(function(data){
+				$scope[categoryModelStr]=data.data.pictures;
+				product[categoryModelStr]=undefined;
+			    console.log(data)
+		   })
 		
+		   .error(function(){
+		 });
+	}
+	$scope.saveProduct = function(){
 		var productPicture = $scope.product.productPicture;
 		var product = $scope.product;
 		var productData={}
-		/**
+	
 		for(var i in product){
 			 if(product[i].toString()==="[object FileList]"){
-				for (var j in product[i]){
-					 fd.append(i+j, product[i][j]);
-				}
 			 }else{
 				  productData[i]=(product[i]);
-			 }
-			
-			 
+			 }	 
 		}
-		**/
+	
 
 		//提交文本
-		/**
+		
 
 		ps.createProduct(productData,$scope.users.setheaders).then(function(data){
 			console.log(data)
@@ -122,36 +152,8 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 				alert(JSON.stringify(err))
 		});
 		
-		**/
-		//多图
-		var f = new FormData();
-		for(var i =0;i< product.productSwiperPicture.length;i++){
-				f.append("document_data[]", product.productSwiperPicture[i]);
-		}
-		//"name"=>"test.png", "remark"=>"remark", "category"=>"1"
-		f.append("name", "test.png");
-		f.append("remark", "remark");
-		f.append("category", "1");
+		
 	
-		// "owner_type"=>"Product", "owner_id"=>"2022"
-		f.append("owner_type", "Product");
-		f.append("owner_id", "2022");
-	
-		var headers=$scope.users.setheaders
-		headers["Content-Type"]=undefined;
-		
-		$http.post("http://116.62.6.81"+"/api/v1/images", f, {
-			  transformRequest: angular.identity,
-			  headers: headers
-		   })
-		
-		   .success(function(data){
-		
-			   console.log(data)
-		   })
-		
-		   .error(function(){
-		 });
 	}
 
 
