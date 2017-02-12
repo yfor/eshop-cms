@@ -3,10 +3,23 @@ define(["angular","framework/http"],function(angular,https){
 		https.call(this,$q);
 	}
 	pdtRequest.prototype = new https();
-	pdtRequest.prototype.getDataforHome = function(num){
+	pdtRequest.prototype.getProductList = function(){
 		return this.doRequest({
-			url:"/api/v1/accounts/1/stores/1/product/"+id,
+			url:"/api/v1/accounts/1/stores/1/products",
 			method:"get"
+		});
+	}
+	pdtRequest.prototype.getProduct = function(id){
+		return this.doRequest({
+			url:"/api/v1/accounts/1/stores/1/products"+"/"+id,
+			method:"get"
+		});
+	}
+	pdtRequest.prototype.delProduct = function(id,headers){
+		return this.doRequest({
+			url:"/api/v1/accounts/1/stores/1/products"+"/"+id,
+			method:"delete",
+			headers:headers
 		});
 	}
 	pdtRequest.prototype.createProduct = function(product,headers){
@@ -17,15 +30,21 @@ define(["angular","framework/http"],function(angular,https){
 			headers:headers
 		});
 	}
-	pdtRequest.prototype.addTobagList = function(params,datalist){
-		console.log(datalist)
-		datalist = JSON.stringify(datalist)
-
+	pdtRequest.prototype.updateProduct = function(product,headers){
+		var id =product.id;
+		var productData={};
+		//处理id
+		for(var i in product){
+			if(i==="id"){
+			}else{
+			  productData[i]=(product[i]);
+			}	 
+		}
 		return this.doRequest({
-			url:"/api/v1/carts",
-			method:"post",
-			data:datalist,
-			headers:params.headers
+			url:"/api/v1/accounts/1/stores/1/products"+"/"+id,
+			method:"put",
+			data:JSON.stringify(productData),
+			headers:headers
 		});
 	}
 	return pdtRequest;

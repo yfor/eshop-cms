@@ -1,5 +1,5 @@
-define(["jquery"],function($){
-	var serviceIP = "http://116.62.6.81";
+define(["jquery","framework/cons"],function($,cons){
+	var serviceIP = cons.serviceIP;
 	function ajax($q){
 		this.get = function(options){
 			var def = $q.defer();

@@ -4,9 +4,11 @@ define(
 	"amaze",
 	"framework/directive",
 	"business/home/config",
-	"framework/services/accountService"
+	"framework/services/accountService",
+	"framework/cons"
+	
 	],
-	function(angularl,uirouter,amaze,frwork,config,accountService){
+	function(angularl,uirouter,amaze,frwork,config,accountService,cons){
 	var con = ["$scope","$state","$rootScope",function($scope,$state,$rootScope){
 
 	}];
@@ -23,6 +25,7 @@ define(
 	frame.run(function($rootScope,$state,$http,$q){
 		$rootScope.users = {};
 		$rootScope.users.account_id=2;
+		$rootScope.serviceIP=cons.serviceIP;
 		getUserDetails();
 		function getUserDetails(){
 		var accountIns = new accountService($q);

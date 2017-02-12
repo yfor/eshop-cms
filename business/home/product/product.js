@@ -1,10 +1,28 @@
 define(["amaze","framework/services/productService","uploadPreview"],function (amaze,productService,uploadPreview){
 	var ctrl = ["$scope","$state","$stateParams","$http","$q",function($scope,$state, $stateParams,$http,$q){
-	
+	var ps = new productService($q);
 	if($stateParams.productId){
 		$scope.title="编辑产品";
+		ps.getProduct($stateParams.productId).then(function(data){
+			console.log(data)
+			if(data.code===0){
+				$scope.product=data.data;
+				for(var i in $scope.imageType){
+					$scope[$scope.imageType[i]]=data.data.pictures[i]
+				}
+			}else{
+				alert(JSON.stringify(data))
+			}
+		},function(err){
+				alert(JSON.stringify(err))
+		});	
 	}else{
 		$scope.title="新建产品";
+	}
+	$scope.imageType={
+		1:'productSwiperPicture',
+		2:'productPicture',
+		3:'productDetailsPicture'
 	}
 	$scope.productCategories=[
 	{
@@ -45,9 +63,7 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		unit:"斤"
 		
 	};
-	
 
-	var ps = new productService($q);
 
 	//文件名称
 	$('.am-form-file input').on('change', function() {
@@ -95,6 +111,11 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 			alert("请选择"+categoryModelStr)
 			return;
 		}
+		if(!$scope.product.id){
+			alert("请先保存")
+			return;
+		}		
+		
 		for(var i =0;i< files.length;i++){
 				f.append("document_data[]", files[i]);
 		}
@@ -110,50 +131,53 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		var headers=$scope.users.setheaders
 		headers["Content-Type"]=undefined;
 		
-		$http.post("http://116.62.6.81"+"/api/v1/images", f, {
+		$http.post($scope.serviceIP+"/api/v1/images", f, {
 			  transformRequest: angular.identity,
 			  headers: headers
-		   })
-		
-		   .success(function(data){
+		   }).success(function(data){
 				$scope[categoryModelStr]=data.data.pictures;
 				product[categoryModelStr]=undefined;
 			    console.log(data)
-		   })
-		
-		   .error(function(){
+		   }).error(function(err){
+			   alert(JSON.stringify(err))
 		 });
 	}
 	$scope.saveProduct = function(){
-		var productPicture = $scope.product.productPicture;
 		var product = $scope.product;
 		var productData={}
 	
 		for(var i in product){
-			 if(product[i].toString()==="[object FileList]"){
+			 if(product[i]&&product[i].toString()==="[object FileList]"){
 			 }else{
 				  productData[i]=(product[i]);
 			 }	 
 		}
-	
-
-		//提交文本
-		
-
-		ps.createProduct(productData,$scope.users.setheaders).then(function(data){
-			console.log(data)
-			if(data.code===0){
-				$scope.product.id=data.data.id;
-				console.log($scope.product.id)
-			}else{
-				alert(JSON.stringify(data))
-			}
-		},function(err){
-				alert(JSON.stringify(err))
-		});
-		
-		
-	
+		//upload
+		if($scope.product.id){
+			ps.updateProduct(productData,$scope.users.setheaders).then(function(data){
+				console.log(data)
+				if(data.code===0){
+					console.log("update");
+				}else{
+					alert(JSON.stringify(data))
+				}
+			},function(err){
+					alert(JSON.stringify(err))
+			});	
+		}else{
+			ps.createProduct(productData,$scope.users.setheaders).then(function(data){
+				console.log(data)
+				if(data.code===0){
+					$scope.product.id=data.data.id;
+					$scope.title="编辑产品";
+					console.log($scope.product.id)
+				}else{
+					alert(JSON.stringify(data))
+				}
+			},function(err){
+					alert(JSON.stringify(err))
+			});	
+		}
 	}
 
 
