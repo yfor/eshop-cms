@@ -26,6 +26,7 @@ define(
 		$rootScope.users = {};
 		$rootScope.users.account_id=2;
 		$rootScope.serviceIP=cons.serviceIP;
+		$rootScope.orderStatuType=cons.orderStatuType;
 		getUserDetails();
 		function getUserDetails(){
 		var accountIns = new accountService($q);

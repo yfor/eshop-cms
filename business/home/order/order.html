@@ -1,0 +1,107 @@
+<header class="am-topbar am-topbar-inverse admin-header" ng-include="'framework/template/header.html'">
+</header>
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+	<div class="admin-sidebar am-offcanvas" id="admin-offcanvas" ng-include="'framework/template/sidebar.html'"></div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+	<form class="am-form">
+	  <fieldset>
+		<legend>订单详情</legend>
+		order
+		<body>
+			<div class="detail_title">订单详情信息</div>
+			<div>
+				<table>
+					<tbody><tr height="50">
+						<td class="detail_title_name">订单编号：</td>
+						<td colspan="3" style="width:440px;" class="detail_title_value">{{order.order_number}}</td>
+					</tr>
+					<tr height="50">
+						<td class="detail_title_name">订单时间：</td>
+						<td class="detail_title_value">
+							{{order.updated_at.replace("T"," ").substr(0,16)}}
+						</td>
+					</tr>
+					<tr height="50">
+						<td class="detail_title_name">订单状态：</td>
+						<td class="detail_title_value" colspan="3">
+							
+								
+								{{orderStatuType[order.status]}}
+								
+								
+								
+							
+						</td>
+						
+					</tr>
+					<tr height="50">
+						<td class="detail_title_name">订单总额：</td>
+						<td class="detail_title_value" colspan="3"> {{order.total_price}}&nbsp;元</td>
+					</tr>
+					<tr height="50">
+						<td class="detail_title_name">支付总额：</td>
+						<td class="detail_title_value">
+						{{order.pay_price}}&nbsp;元
+						</td>
+						<td class="detail_title_name"></td>
+						<td class="detail_title_value"></td>
+					</tr>
+				</tbody></table>
+			</div>
+			<div class="detail_title">付款信息</div>
+			<div>
+				<table>
+					<tbody><tr height="50">
+						<td class="detail_title_name">支付时间：</td>
+						<td colspan="3" style="width:440px;" class="detail_title_value">0003920170211160921</td>
+					</tr>
+				</tbody></table>
+			</div>
+			<div class="detail_title">商品信息</div>
+			<div>
+				<table width="80%" align="center">
+					<tbody><tr height="50">
+						<th>序号</th><th>名称</th><th>图片</th><th>单价</th><th>数量</th>
+					</tr>
+					
+				</tbody></table>
+			</div>				
+			<div class="detail_title">收货信息</div>
+			<div>
+				<table width="80%" align="center">
+					<tbody><tr height="50">
+						<td class="detail_title_name">收货地址：</td>
+						<td class="detail_title_value" colspan="3">{{order.consignee_address}}</td>
+					</tr>
+						<tr height="50">
+						<td class="detail_title_name">收货人：</td>
+						<td class="detail_title_value" colspan="3"> </td>
+					</tr>
+						<tr height="50">
+						<td class="detail_title_name">电话：</td>
+						<td class="detail_title_value" colspan="3"> </td>
+					</tr>
+				</tbody></table>
+			</div>				
+
+		</body>
+	  </fieldset>
+	</form>
+	
+	 
+  </div>
+ <!-- content end -->
+
+</div>
+
+<a  class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<footer  ng-include="'framework/template/footer.html'">
+</footer>
+
+

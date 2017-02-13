@@ -39,6 +39,24 @@ define(["angular","ui-router"],function(angular,uirouter){
 						}
 					}
 				});
+		$stateProvider.state("order",{
+					url:"/order?:orderId",
+					templateUrl:"./business/home/order/order.html",
+					controller:"order.ctrl",
+					resolve:{
+						deps:function($q,$rootScope){
+							var defered = $q.defer();
+							var dependiences = ["./business/home/order/order"];
+							require(dependiences,function(ctrl){
+								$rootScope.$apply(function(){
+									$controllerProvider.register("order.ctrl",ctrl);
+									defered.resolve();
+								});
+							});
+							return defered.promise;
+						}
+					}
+				});				
 		$stateProvider.state("productsList",{
 					url:"/productsList",
 					templateUrl:"./business/home/productsList/productsList.html",

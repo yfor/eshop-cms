@@ -65,43 +65,20 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 	};
 
 
-	//文件名称
-	$('.am-form-file input').on('change', function() {
-	  var fileNames = '';
-	  for (var j in this.files){
-		fileNames = '<span class="am-badge">' + this.files[j].name + '</span> ';
-		var showId="#file-"+this.id+j;
-		$(showId).html(fileNames);
-		}  
-	});
 	//文件预览
+	for(var i in $scope.imageType){
 	  $.uploadPreview({
-		input_field: "#doc-form-productPicture",   // Default: .image-upload
-		preview_box: "#file-doc-form-productPicture",  // Default: .image-preview
+		input_field: "#doc-form-"+$scope.imageType[i],   // Default: .image-upload
+		preview_box: "#file-doc-form-"+$scope.imageType[i],  // Default: .image-preview
 		label_field: "#image-label",    // Default: .image-label
 		label_default: "Choose File",   // Default: Choose File
 		label_selected: "Change File",  // Default: Change File
 		no_label: false,                // Default: false
 		success_callback: angular.noop          // Default: null
-	  });
-	  $.uploadPreview({
-		input_field: "#doc-form-productSwiperPicture",   // Default: .image-upload
-		preview_box: "#file-doc-form-productSwiperPicture",  // Default: .image-preview
-		label_field: "#image-label",    // Default: .image-label
-		label_default: "Choose File",   // Default: Choose File
-		label_selected: "Change File",  // Default: Change File
-		no_label: false,                // Default: false
-		success_callback: angular.noop          // Default: null
-	  });
-	  $.uploadPreview({
-		input_field: "#doc-form-productDetailsPicture",   // Default: .image-upload
-		preview_box: "#file-doc-form-productDetailsPicture",  // Default: .image-preview
-		label_field: "#image-label",    // Default: .image-label
-		label_default: "Choose File",   // Default: Choose File
-		label_selected: "Change File",  // Default: Change File
-		no_label: false,                // Default: false
-		success_callback: angular.noop          // Default: null
-	  });
+	  });	
+	}
+
+	 
 	$scope.uploadPicture= function(category,categoryModelStr){
 		//多图
 		var product = $scope.product;
