@@ -9,6 +9,7 @@ require.config({
 			"amaze":"lib/amaze/js/amazeui.min.js",
 			"iscl":"lib/iscroll.js",
 			"uploadPreview":"lib/uploadPreview.js",
+			"datetimepicker":"lib/amaze/js/amazeui.datetimepicker.js",
 		},
 	},
 

@@ -1,6 +1,15 @@
 define(["amaze",
-	"framework/services/orderService"],function (amaze,orderService){
+	"framework/services/orderService","datetimepicker"],function (amaze,orderService,datetimepicker){
 	var ctrl = ["$scope","$state","$stateParams","$http","$q",function($scope,$state, $stateParams,$http,$q){
+		var $dpInput = $('.form-datetime').datetimepicker({
+			language:  'zh-CN',
+			format: 'yyyy-mm-dd hh:ii',
+			autoclose: true,
+			todayBtn: true
+		});
+		$('#timeStart').datetimepicker('update', new Date());
+		$('#timeEnd').datetimepicker('update', new Date());
+		
 		
 		var orderStatuTypeMap={}
 		for (var i in $scope.orderStatuType){
@@ -27,7 +36,8 @@ define(["amaze",
 			});
 		}		
 		$scope.getOrders()
-		$scope.closeOrder= function(id,order){
+		$scope.closeOrder= function(id,order,$event){
+		$event.stopPropagation()
 		order.status=3;
 		os.closeOrder(id,order,$scope.users.setheaders).then(function(data){
 			

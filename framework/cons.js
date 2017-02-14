@@ -8,5 +8,6 @@ define(function(){
 			3:"已发货",
 			9:"已完成"
 		}
+	
 	return cons;
 });
