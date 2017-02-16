@@ -5,10 +5,12 @@ define(
 	"framework/directive",
 	"business/home/config",
 	"framework/services/accountService",
-	"framework/cons"
+	"framework/services/orderService",
+	"framework/cons",
+	"datetimepicker"
 	
 	],
-	function(angularl,uirouter,amaze,frwork,config,accountService,cons){
+	function(angularl,uirouter,amaze,frwork,config,accountService,orderService,cons,datetimepicker){
 	var con = ["$scope","$state","$rootScope",function($scope,$state,$rootScope){
 
 	}];
@@ -22,7 +24,7 @@ define(
 	frame.config(function(){
 	});
 	// run
-	frame.run(function($rootScope,$state,$http,$q){
+	frame.run(function($rootScope,$state,$http,$q,$interval){
 		$rootScope.users = {};
 		$rootScope.users.account_id=2;
 		$rootScope.serviceIP=cons.serviceIP;
@@ -69,11 +71,61 @@ define(
 			},0);
 		}
 		
-
+		
 		$rootScope.historyBack = function(){
 			window.history.back(-1);
 		};
+		var os = new orderService($q);
+		$rootScope.number=0;
+		$rootScope.lastRefreshTimeInput=$('<input id="lastRefreshTime" size="16" type="text"  readonly class="form-datetime am-form-field">')
+		.datetimepicker({
+			language:  'zh-CN',
+			format: 'yyyy-mm-dd hh:ii',
+			autoclose: true,
+			todayBtn: true
+		});
+		
+		var nowBeforeDay=new Date()
+		nowBeforeDay.setDate(nowBeforeDay.getDate()-1)
+		$rootScope.lastRefreshTimeInput.datetimepicker('update',nowBeforeDay);
+		$rootScope.lastRefreshTimeEndInput=$('<input id="lastRefreshTimeEnd" size="16" type="text"  readonly class="form-datetime am-form-field">')
+		.datetimepicker({
+			language:  'zh-CN',
+			format: 'yyyy-mm-dd hh:ii',
+			autoclose: true,
+			todayBtn: true
+		});
+		var nowAfterDay=new Date()
+		nowAfterDay.setDate(nowAfterDay.getDate()+1)
+		$rootScope.lastRefreshTimeEndInput.datetimepicker('update',nowAfterDay);
+		$interval(function(){
+			var queryObject={
+				status:"2"
+			};
+			queryObject.begin_time=$rootScope.lastRefreshTimeInput.val();
+			queryObject.end_time=$rootScope.lastRefreshTimeEndInput.val();
+			os.getOrderStatus(queryObject).then(function(data){
+				console.log(data)
+				if(data.code===0){
+					var total_count=data.data.length;
+					if(total_count){
+						order_mp3.play()
+					}
+					$rootScope.number=total_count;
+				}else{
+					$rootScope.number=0;
+					alert(JSON.stringify(data))
+				}
 
+			},function(err){
+				$rootScope.number=0;
+				alert(JSON.stringify(err))
+			});
+	
+       
+	
+		},1000*60);//一分钟
+		
 	});
 
 	return frame;

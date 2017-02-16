@@ -3,10 +3,13 @@ define(["angular","framework/http"],function(angular,https){
 		https.call(this,$q);
 	}
 	ordersReq.prototype = new https();
-	ordersReq.prototype.getOrderStatus = function(id){
-		
+	ordersReq.prototype.getOrderStatus = function(query){
+		var str="?";
+		for(var i in query){
+			str+=i+"="+query[i]+"&"
+		}
 		return this.doRequest({
-			url:"/api/v1/orders?buyer_type=Customer&buyer_id="+ id,
+			url:"/api/v1/orders"+str,
 			method:"get"
 		});
 	}

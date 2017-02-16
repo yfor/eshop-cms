@@ -7,10 +7,15 @@
 <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 
 <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
-  <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 未处理 <span class="am-badge am-badge-warning">5</span></a></li>
+  <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 未处理 <span class="am-badge am-badge-warning">{{number}}</span></a></li>
   <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
 </ul>
 </div>
+<audio id="order_mp3" >
+  <source src="music/order.mp3" type="audio/mp3" />
+  
+Your browser does not support this audio format.
+</audio>
 <script>
 	var $fullText = $('.admin-fullText');
 	$('#admin-fullscreen').on('click', function() {
