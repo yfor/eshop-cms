@@ -8,8 +8,29 @@
 
       <div class="am-panel am-panel-default admin-sidebar-panel">
         <div class="am-panel-bd">
-          <p><span class="am-icon-bookmark"></span> 公告</p>
-          <p>cms 后台管理</p>
+          <p><span class="am-icon-bookmark"></span>所需商品</p>
+         <table ng-if="number"class="am-table am-table-bordered am-table-striped am-table-compact">
+		  <thead>
+		  <tr>
+			<th>商品名称</th>
+			<th>需量</th>
+			<th>存量</th>
+		  </tr>
+		  </thead>
+		  <tbody>
+		  <tr ng-repeat = "p in showTips ">
+			<td>{{p.name}}</td>
+			<td><span class="am-badge am-badge-success am-round">{{p.needNumber}}</span></td>
+			<td>
+			<span ng-if="p.stock<p.needNumber" class="am-badge am-badge-danger am-round">{{p.stock}}!!</span>
+			<span ng-if="p.stock<20"class="am-badge am-badge-danger am-round">{{p.stock}}!!</span>
+			<span ng-if="p.stock>150" class="am-badge am-badge-primary am-round">{{p.stock}}</span>
+			
+			</td>
+		  </tr>
+		  </tbody>
+		</table>
+
         </div>
       </div>
 

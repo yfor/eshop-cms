@@ -7,7 +7,7 @@
   <!-- sidebar end -->
 
   <!-- content start -->
-  <div class="admin-content">
+  <div class="admin-content ">
   	<form class="am-form am-form-inline">
 	  <fieldset>
 		<legend>订单列表</legend>
@@ -31,21 +31,40 @@
 	</form>
 	<div class="am-g">
         <div class="am-u-sm-12">
+		  <div class="am-scrollable-horizontal">
           <table class="am-table am-table-bd am-table-striped admin-content-table">
             <thead>
             <tr>						
               <th>订单编号</th><th>支付总额</th>
-			  <th>状态</th><th>支付时间</th><th>发货</th><th>查看</th>
+			  <th>支付时间</th>
+			  <th>产品信息</th><th>客户信息</th>
+			  <th>状态</th><th>发货</th><th>查看</th>
             </tr>
             </thead>
             <tbody>
             <tr  ng-repeat = "order in orderList track by $index">
 			<td>{{order.order_number}}</td>
 			<td>{{order.pay_price}}元</td>
-			<td>{{orderStatuType[order.status]}}</td>
 			<td>{{order.payment_time.replace("T"," ").substr(0,16)}}</td>
+			<td>
+			<ul>
+			<li ng-repeat = "p in order.order_details track by $indexP" >
+			{{p.product.name}}
+			<span class="am-badge am-badge-success am-round">
+			{{p.quantity}}
+			</span>
+			</li>
+			<ul>
+			</td>
+			
+			<td>
+			<span class="am-badge ">{{order.consignee_address}}</span>
+			<span class="am-badge am-badge-primary  am-radius">{{order.consignee_name}}</span>
+			<span class="am-badge am-badge-secondary am-round">{{order.consignee_phone}}</span>
+			</td>
+			<td>{{orderStatuType[order.status]}}</td>
             <td>
-				<button type="button" class="am-btn am-btn-success" ng-click = "closeOrder(order.id,order,$event)">发货</button>
+				<button ng-show="order.status==2" type="button" class="am-btn am-btn-success" ng-click = "closeOrder(order.id,order,$event)">发货</button>
 			</td>
 			<td>
 				<a ui-sref="order({ orderId: {{order.id}} })">详情</a>
@@ -54,6 +73,7 @@
             
             </tbody>
           </table>
+		  </div>
 		  <tm-pagination conf="paginationConf"></tm-pagination>
         </div>
     </div>

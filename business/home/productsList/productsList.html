@@ -7,12 +7,9 @@
   <!-- sidebar end -->
 
   <!-- content start -->
-  <div class="admin-content">
+  <div class="admin-content" >
         <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
         <li><a ui-sref="product" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>新增产品<br/>2300</a></li>
-        <li><a ui-sref="product" class="am-text-warning"><span class="am-icon-btn am-icon-briefcase"></span><br/>单品精选<br/>308</a></li>
-        <li><a ui-sref="product" class="am-text-danger"><span class="am-icon-btn am-icon-recycle"></span><br/>个人套餐<br/>80082</a></li>
-        <li><a ui-sref="product" class="am-text-secondary"><span class="am-icon-btn am-icon-user-md"></span><br/>团队套餐<<br/>3000</a></li>
 		</ul>
 	<form class="am-form">
 	  <fieldset>
@@ -32,7 +29,7 @@
 			 <img  ng-repeat = "file in product.pictures[2] track by $index" class="am-radius" alt="140*140" ng-src="{{serviceIP+file.document.url}}" width="40" height="40" />
 			 </td>
 			 <td>{{product.name}}</td>
-			 <td><a href="#">{{product.description}}</a></td> 
+			 <td><a >{{product.description}}</a></td> 
 			 <td><span class="am-badge am-badge-success">{{product.stock}}</span></td>
              <td>
 			  <a ui-sref="product({ productId: {{product.id}} })" class="am-text-success">编辑</a>

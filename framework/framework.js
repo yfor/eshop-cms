@@ -85,33 +85,73 @@ define(
 			todayBtn: true
 		});
 		
-		var nowBeforeDay=new Date()
-		nowBeforeDay.setDate(nowBeforeDay.getDate()-1)
-		$rootScope.lastRefreshTimeInput.datetimepicker('update',nowBeforeDay);
-		$rootScope.lastRefreshTimeEndInput=$('<input id="lastRefreshTimeEnd" size="16" type="text"  readonly class="form-datetime am-form-field">')
-		.datetimepicker({
-			language:  'zh-CN',
-			format: 'yyyy-mm-dd hh:ii',
-			autoclose: true,
-			todayBtn: true
-		});
-		var nowAfterDay=new Date()
-		nowAfterDay.setDate(nowAfterDay.getDate()+1)
-		$rootScope.lastRefreshTimeEndInput.datetimepicker('update',nowAfterDay);
+	$rootScope.tippEdOrder={}
 		$interval(function(){
 			var queryObject={
 				status:"2"
 			};
+			var nowBeforeDay=new Date()
+			nowBeforeDay.setDate(nowBeforeDay.getDate()-1)
+			$rootScope.lastRefreshTimeInput.datetimepicker('update',nowBeforeDay);
+			$rootScope.lastRefreshTimeEndInput=$('<input id="lastRefreshTimeEnd" size="16" type="text"  readonly class="form-datetime am-form-field">')
+			.datetimepicker({
+				language:  'zh-CN',
+				format: 'yyyy-mm-dd hh:ii',
+				autoclose: true,
+				todayBtn: true
+			});
+			var nowAfterDay=new Date()
+			nowAfterDay.setDate(nowAfterDay.getDate()+1)
+			$rootScope.lastRefreshTimeEndInput.datetimepicker('update',nowAfterDay);
+			
+			
+			
 			queryObject.begin_time=$rootScope.lastRefreshTimeInput.val();
 			queryObject.end_time=$rootScope.lastRefreshTimeEndInput.val();
 			os.getOrderStatus(queryObject).then(function(data){
 				console.log(data)
 				if(data.code===0){
-					var total_count=data.data.length;
-					if(total_count){
-						order_mp3.play()
+					var orders=data.data.orders;
+					var isPlayMusic=false;
+					var showTips={};
+					for(var i in orders){
+						var order =orders[i];
+						var order_number=order.order_number
+						if($rootScope.tippEdOrder.hasOwnProperty(order_number)){
+							if($rootScope.tippEdOrder[order_number]<4){
+								$rootScope.tippEdOrder[order_number]++;
+								isPlayMusic=true;
+							}
+						}else{
+							$rootScope.tippEdOrder[order_number]=0;
+							isPlayMusic=true;
+						}
+						
+						var order_details=order.order_details
+						for(var j in order_details){
+							var order_detail_item=order_details[j];
+							var id=order_detail_item.product.id;
+							var quantity=order_detail_item.quantity;
+							if(showTips[id]){
+								showTips[id].needNumber+=quantity;
+							}else{
+								showTips[id]={};
+								showTips[id].needNumber=quantity;
+								showTips[id].name=order_detail_item.product.name;
+								showTips[id].stock=order_detail_item.product.stock;
+							}
+						}
+						
 					}
+					var total_count=data.data.total_count;
+				
 					$rootScope.number=total_count;
+					$rootScope.showTips=showTips;
+					if(isPlayMusic){
+						order_mp3.play()	
+					}
+					
+					
 				}else{
 					$rootScope.number=0;
 					alert(JSON.stringify(data))
@@ -124,7 +164,7 @@ define(
 	
        
 	
-		},1000*60);//一分钟
+		},1000*60*3);//3分钟
 		
 	});
 
