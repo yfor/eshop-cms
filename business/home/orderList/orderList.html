@@ -51,7 +51,7 @@
 			<li ng-repeat = "p in order.order_details track by $indexP" >
 			{{p.product.name}}
 			<span class="am-badge am-badge-success am-round">
-			{{p.quantity}}
+			{{p.quantity}}{{p.product.unit}}
 			</span>
 			</li>
 			<ul>
