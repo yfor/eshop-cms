@@ -1,40 +1,35 @@
 require.config({
 	baseUrl:"./",
-
-	map:{
-		"*":{
-			"jquery":"lib/jquery.min",
-			"angular":"lib/angular.min",
-			"ui-router":"lib/angular-ui-router",
-			"amaze":"lib/amaze/js/amazeui.min.js",
-			"uploadPreview":"lib/uploadPreview.js",
-			"datetimepicker":"lib/amaze/js/amazeui.datetimepicker.js",
-		},
-	},
-
 	paths :{
-		amaze:"lib/amaze/js"
+		"jquery":"http://cdn.bootcss.com/jquery/2.2.1/jquery.min",
+		"angular":"http://cdn.bootcss.com/angular.js/1.5.0/angular.min",
+		"ui-router":"http://cdn.bootcss.com/angular-ui-router/1.0.0-rc.1/angular-ui-router.min",
+		"amaze":"http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min",
+		"uploadPreview":"lib/uploadPreview",
+		"datetimepicker":"lib/amaze/js/amazeui.datetimepicker"
 		
 	},
 
 	shim:{
-		'lib/jquery.min':{
+		'jquery':{
 			"exports":'$'
 		},
 
-		"amaze/amazeui.min":{
-			"deps":["lib/jquery.min"],
+		"amaze":{
+			"deps":["jquery"],
 			"exports":"amaze"
 		},
-		'lib/angular.min':{
-			"deps":["lib/jquery.min"],
+		'angular':{
+			"deps":["jquery"],
 			"exports":'angular'
 		},
-		"lib/angular-ui-router":{
-			"deps":["lib/angular.min"]
+		"ui-router":{
+			"deps":["angular"],
+			"exports": 'ngRouteModule'
 		}
 
 	},
+	
 	priority:["angular"],
 
 })
