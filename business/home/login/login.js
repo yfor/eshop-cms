@@ -1,4 +1,4 @@
-define(["amaze"],function (amaze){
+define([],function (){
 	var ctrl = ["$scope","$state","$stateParams","$http","$q",function($scope,$state, $stateParams,$http,$q){
 	$scope.currentuser={};
 	$scope.currentuser.name="admin"

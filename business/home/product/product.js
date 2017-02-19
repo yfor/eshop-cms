@@ -124,7 +124,7 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		var productData={}
 	
 		for(var i in product){
-			 if(product[i]&&product[i].toString()==="[object FileList]"){
+			 if(product[i]&&(product[i].toString()==="[object FileList]"||a.join)){
 			 }else{
 				  productData[i]=(product[i]);
 			 }	 

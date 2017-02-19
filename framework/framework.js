@@ -61,7 +61,7 @@ define(
 		$rootScope.$on("$stateChangeSuccess",function(e,c,n){
 			setTimeout(function(){
 				$(".loading").hide();				
-			},200);
+			},0);
 
 		});
 
@@ -91,7 +91,7 @@ define(
 				status:"2"
 			};
 			var nowBeforeDay=new Date()
-			nowBeforeDay.setDate(nowBeforeDay.getDate()-3)
+			nowBeforeDay.setDate(nowBeforeDay.getDate()-1)
 			$rootScope.lastRefreshTimeInput.datetimepicker('update',nowBeforeDay);
 			$rootScope.lastRefreshTimeEndInput=$('<input id="lastRefreshTimeEnd" size="16" type="text"  readonly class="form-datetime am-form-field">')
 			.datetimepicker({
