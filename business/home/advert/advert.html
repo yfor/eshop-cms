@@ -27,14 +27,14 @@
 		<button type="button" class="am-btn am-btn-success am-btn-sm" ng-click = "uploadPicture(1,'picture')">
 			<i class="am-icon-cloud-upload"></i> 上传</button>
 		<br>
-		<img  ng-repeat = "file in advert.picture[0] track by $index" class="am-radius" alt="140*140" ng-src="{{serviceIP+file.document.url}}" width="140" height="140" />
+		<img  ng-repeat = "file in advert.pictures track by $index" class="am-radius" alt="140*140" ng-src="{{serviceIP+file.document.url}}" width="140" height="140" />
 		<br>
 		<label for="productName">广告描述:</label>
 		<input type="text"  id="productName"  ng-model="advert.description">
 		<br>
 		
 		<label for="productName">产品:</label>
-		  <select ng-model="advert.products" multiple class="" >
+		  <select ng-model="advert.product_ids" multiple class="" >
 			<option ng-repeat="p in productList" selected value="{{p.id}}">{{p.name}}</option>
 		  </select>
 		 </div>

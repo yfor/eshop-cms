@@ -6,7 +6,15 @@ define(["amaze","framework/services/advertService","framework/services/productSe
 		ps.getProductList().then(function(data){
 			console.log(data)
 			if(data.code===0){
-				$scope.productList=data.data;
+				var d=data.data;
+				
+				var a=[]
+				
+				for(var i=0;i<d.length;i++){
+					a.push({id:d[i].id,name:d[i].name})
+				}
+				console.log(a)
+				$scope.productList=a;
 				if($stateParams.advertId){
 					$scope.title="编辑广告";
 					as.getAdvert($stateParams.advertId).then(function(data){
@@ -23,7 +31,7 @@ define(["amaze","framework/services/advertService","framework/services/productSe
 
 							}
 							console.log(a)
-							$scope.advert.productList=a;
+							$scope.advert.product_ids=a;
 						
 
 						}else{
@@ -113,7 +121,7 @@ define(["amaze","framework/services/advertService","framework/services/productSe
 		   }).success(function(data){
 				console.log(data)
 				$scope[categoryModelStr]=undefined;
-				$scope.advert[categoryModelStr]=data.data.pictures;
+				$scope.advert[categoryModelStr+"s"]=data.data.pictures;
 		   }).error(function(err){
 			   alert(JSON.stringify(err))
 		 });
@@ -121,13 +129,29 @@ define(["amaze","framework/services/advertService","framework/services/productSe
 	$scope.saveAdvert = function(){
 		var advert = $scope.advert;
 		var advertData={}
-	
-		for(var i in advert){
-			 if(advert[i]&&(advert[i].toString()==="[object FileList]"||i==="picture")){
-			 }else{
-				  advertData[i]=(advert[i]);
-			 }	 
+		/**
+		{"advert"=>{
+			"title"=>"三八节首页轮播广告222333",
+		"description"=>"广告描述222233333",
+		 "status"=>2, 
+		"category"=>2,
+		 "remark"=>"2222",
+		 "product_ids"=>[2150, 2151]}, "id"=>"14"}
+		**/
+		advertData.id=advert.id;
+		advertData.title=advert.title;
+		advertData.description=advert.description;
+		advertData.status=advert.status;
+		advertData.category=advert.category;
+		advertData.remark=advert.remark;
+		var a=[]
+		for(var i in advert.product_ids){
+			
+			a[i]=advert.product_ids[i]-0;
 		}
+		
+		
+		advertData.product_ids=a;
 		//upload
 		if($scope.advert.id){
 			as.updateAdvert(advertData,$scope.users.setheaders).then(function(data){

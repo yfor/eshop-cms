@@ -26,7 +26,7 @@
             <tr ng-repeat = "advert in advertList track by $index">
 			 <td>{{advert.id}}</td>
 			 <td>
-			 
+			  <img  ng-repeat = "file in advert.pictures track by $index" class="am-radius" alt="140*140" ng-src="{{serviceIP+file.document.url}}" width="40" height="40" />
 			 </td>
 			 <td>{{advert.title}}</td>
 			 <td><a >{{advert.description}}</a></td> 
@@ -41,7 +41,7 @@
 			  <a ui-sref="advert({ advertId: {{advert.id}} })" class="am-text-success">编辑</a>
              </td>
 			 <td>
-				<a class="am-icon-close" ng-click = "delProduct(a.id)">
+				<a class="am-icon-close" ng-click = "delAdvert(advert.id)">
 				删除
 				</a>
              </td>

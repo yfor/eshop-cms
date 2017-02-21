@@ -16,11 +16,11 @@ define(["amaze","framework/services/advertService"],function (amaze,advertServic
 		$scope.getAdvertList();
 
 		
-	$scope.delProduct= function(id){
-		ps.delProduct(id,$scope.users.setheaders).then(function(data){
+	$scope.delAdvert= function(id){
+		as.delAdvert(id,$scope.users.setheaders).then(function(data){
 			console.log(data)
 			if(data.code===0){
-				$scope.getProductList();
+				$scope.getAdvertList();
 			}else{
 				alert(JSON.stringify(data))
 			}

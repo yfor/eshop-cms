@@ -15,9 +15,9 @@ define(["angular","framework/http"],function(angular,https){
 			method:"get"
 		});
 	}
-	advertRequest.prototype.delProduct = function(id,headers){
+	advertRequest.prototype.delAdvert = function(id,headers){
 		return this.doRequest({
-			url:"/api/v1/accounts/1/stores/1/products"+"/"+id,
+			url:"/api/v1/adverts"+"/"+id,
 			method:"delete",
 			headers:headers
 		});
@@ -43,7 +43,7 @@ define(["angular","framework/http"],function(angular,https){
 		return this.doRequest({
 			url:"/api/v1/adverts"+"/"+id,
 			method:"put",
-			data:JSON.stringify(advertData),
+			data:JSON.stringify({advert:advertData}),
 			headers:headers
 		});
 	}
