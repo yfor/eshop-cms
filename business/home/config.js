@@ -100,7 +100,7 @@ define(["angular","ui-router"],function(angular,uirouter){
 					resolve:{
 						deps:function($q,$rootScope){
 							var defered = $q.defer();
-							var dependiences = ["./business/home/productsList/adverts"];
+							var dependiences = ["./business/home/adverts/adverts"];
 							require(dependiences,function(ctrl){
 								$rootScope.$apply(function(){
 									$controllerProvider.register("adverts.ctrl",ctrl);

@@ -9,33 +9,39 @@
   <!-- content start -->
   <div class="admin-content" >
         <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
-        <li><a ui-sref="product" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>新增产品<br/>2300</a></li>
+        <li><a ui-sref="advert" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>新增广告<br/>2300</a></li>
 		</ul>
 	<form class="am-form">
 	  <fieldset>
-		<legend>产品列表</legend>
+		<legend>广告列表</legend>
 		<div class="am-g">
         <div class="am-u-sm-12">
           <table class="am-table am-table-bd am-table-striped admin-content-table">
             <thead>
             <tr>
-              <th>ID</th><th>图片</th><th>产品名称</th><th>产品描述</th><th>库存</th><th>编辑</th><th>删除</th>
+              <th>ID</th><th>图片</th><th>广告名称</th><th>广告描述</th><th>产品</th><th>编辑</th><th>删除</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat = "product in productList track by $index">
-			 <td>{{product.id}}</td>
+            <tr ng-repeat = "advert in advertList track by $index">
+			 <td>{{advert.id}}</td>
 			 <td>
-			 <img  ng-repeat = "file in product.pictures[2] track by $index" class="am-radius" alt="140*140" ng-src="{{serviceIP+file.document.url}}" width="40" height="40" />
+			 
 			 </td>
-			 <td>{{product.name}}</td>
-			 <td><a >{{product.description}}</a></td> 
-			 <td><span class="am-badge am-badge-success">{{product.stock}}</span></td>
+			 <td>{{advert.title}}</td>
+			 <td><a >{{advert.description}}</a></td> 
+			 <td>
+			 <ul>
+				 <li>
+					<span  ng-repeat = "p in advert.products track by $index" class="am-badge am-badge-success">{{p.name}}</span>
+				 </li>
+			 </ul>
+			 </td>
              <td>
-			  <a ui-sref="product({ productId: {{product.id}} })" class="am-text-success">编辑</a>
+			  <a ui-sref="advert({ advertId: {{advert.id}} })" class="am-text-success">编辑</a>
              </td>
 			 <td>
-				<a class="am-icon-close" ng-click = "delProduct(product.id)">
+				<a class="am-icon-close" ng-click = "delProduct(a.id)">
 				删除
 				</a>
              </td>

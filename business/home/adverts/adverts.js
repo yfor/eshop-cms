@@ -1,11 +1,11 @@
-define(["amaze","framework/services/productService"],function (amaze,productService){
+define(["amaze","framework/services/advertService"],function (amaze,advertService){
 	var ctrl = ["$scope","$state","$stateParams","$http","$q",function($scope,$state, $stateParams,$http,$q){
-		var ps = new productService($q);
-		$scope.getProductList=function(){
-			ps.getProductList().then(function(data){
+		var as = new advertService($q);
+		$scope.getAdvertList=function(){
+			as.getAdvertList().then(function(data){
 				console.log(data)
 				if(data.code===0){
-					$scope.productList=data.data;
+					$scope.advertList=data.data.adverts;
 				}else{
 					alert(JSON.stringify(data))
 				}
@@ -13,7 +13,7 @@ define(["amaze","framework/services/productService"],function (amaze,productServ
 					alert(JSON.stringify(err))
 		});	
 		}
-		$scope.getProductList();
+		$scope.getAdvertList();
 
 		
 	$scope.delProduct= function(id){

@@ -1,66 +1,66 @@
-define(["amaze","framework/services/productService","uploadPreview"],function (amaze,productService,uploadPreview){
+define(["amaze","framework/services/advertService","framework/services/productService","uploadPreview"],function (amaze,advertService,productService,uploadPreview){
 	var ctrl = ["$scope","$state","$stateParams","$http","$q",function($scope,$state, $stateParams,$http,$q){
+	var as= new advertService($q);
 	var ps = new productService($q);
-	if($stateParams.productId){
-		$scope.title="编辑产品";
-		ps.getProduct($stateParams.productId).then(function(data){
+	$scope.getProductList=function(){
+		ps.getProductList().then(function(data){
 			console.log(data)
 			if(data.code===0){
-				$scope.product=data.data;
-				for(var i in $scope.imageType){
-					$scope[$scope.imageType[i]]=data.data.pictures[i]
+				$scope.productList=data.data;
+				if($stateParams.advertId){
+					$scope.title="编辑广告";
+					as.getAdvert($stateParams.advertId).then(function(data){
+						console.log(data)
+						if(data.code===0){
+							$scope.advert=data.data;
+						
+
+							var a=[]
+							if($scope.advert.products){
+								for(var i=0;i<$scope.advert.products.length;i++){
+									a.push($scope.advert.products[i].id)
+								}
+
+							}
+							console.log(a)
+							$scope.advert.productList=a;
+						
+
+						}else{
+							alert(JSON.stringify(data))
+						}
+					},function(err){
+							alert(JSON.stringify(err))
+					});	
+				}else{
+					$scope.title="新建广告";
 				}
 			}else{
 				alert(JSON.stringify(data))
 			}
 		},function(err){
 				alert(JSON.stringify(err))
-		});	
-	}else{
-		$scope.title="新建产品";
+	});	
 	}
+	$scope.getProductList();
+	
+	
 	$scope.imageType={
 		1:'productSwiperPicture',
 		2:'productPicture',
 		3:'productDetailsPicture'
 	}
-	$scope.productCategories=[
+	$scope.advertCategories=[
 	{
-		name:"单品精选",
+		name:"首页",
 		id:1
-	},
-		{
-		name:"个人套餐",
-		id:2
-	},	{
-		name:"企业套餐",
-		id:3
-	},	{
-		name:"周边",
-		id:4
 	}
 	]
-	$scope.units=[
-	{
-		name:"斤",
-		id:0
-	},
-		{
-		name:"份",
-		id:1
-	},	{
-		name:"个",
-		id:2
-	}
-	]
-	$scope.product={
-		name:"繁花·混合鲜花月套餐",
-		description:"一周一花，每月4次，精选3-5种当季花材，品种随机",
-		price:159,
-		real_price:172,
-		stock:1000,
-		category_id:1,
-		unit:"斤"
+
+	$scope.advert={
+		title:"38妇女节",
+		description:"38妇女节广告节",
+		category:1
 		
 	};
 
@@ -81,18 +81,17 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 	 
 	$scope.uploadPicture= function(category,categoryModelStr){
 		//多图
-		var product = $scope.product;
+		
 		var f = new FormData();
-		var files=product[categoryModelStr];
+		var files=$scope[categoryModelStr];
 		if(!files){
 			alert("请选择"+categoryModelStr)
 			return;
 		}
-		if(!$scope.product.id){
+		if(!$scope.advert.id){
 			alert("请先保存")
 			return;
 		}		
-		
 		for(var i =0;i< files.length;i++){
 				f.append("document_data[]", files[i]);
 		}
@@ -102,8 +101,8 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		f.append("category", category);
 	
 		// "owner_type"=>"Product", "owner_id"=>"2022"
-		f.append("owner_type", "Product");
-		f.append("owner_id", $scope.product.id);
+		f.append("owner_type", "Advert");
+		f.append("owner_id", $scope.advert.id);
 	
 		var headers=$scope.users.setheaders
 		headers["Content-Type"]=undefined;
@@ -112,26 +111,26 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 			  transformRequest: angular.identity,
 			  headers: headers
 		   }).success(function(data){
-				$scope[categoryModelStr]=data.data.pictures;
-				product[categoryModelStr]=undefined;
-			    console.log(data)
+				console.log(data)
+				$scope[categoryModelStr]=undefined;
+				$scope.advert[categoryModelStr]=data.data.pictures;
 		   }).error(function(err){
 			   alert(JSON.stringify(err))
 		 });
 	}
-	$scope.saveProduct = function(){
-		var product = $scope.product;
-		var productData={}
+	$scope.saveAdvert = function(){
+		var advert = $scope.advert;
+		var advertData={}
 	
-		for(var i in product){
-			 if(product[i]&&(product[i].toString()==="[object FileList]"||a.join)){
+		for(var i in advert){
+			 if(advert[i]&&(advert[i].toString()==="[object FileList]"||i==="picture")){
 			 }else{
-				  productData[i]=(product[i]);
+				  advertData[i]=(advert[i]);
 			 }	 
 		}
 		//upload
-		if($scope.product.id){
-			ps.updateProduct(productData,$scope.users.setheaders).then(function(data){
+		if($scope.advert.id){
+			as.updateAdvert(advertData,$scope.users.setheaders).then(function(data){
 				console.log(data)
 				if(data.code===0){
 					console.log("update");
@@ -142,12 +141,12 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 					alert(JSON.stringify(err))
 			});	
 		}else{
-			ps.createProduct(productData,$scope.users.setheaders).then(function(data){
+			as.createAdvert(advertData,$scope.users.setheaders).then(function(data){
 				console.log(data)
 				if(data.code===0){
-					$scope.product.id=data.data.id;
-					$scope.title="编辑产品";
-					console.log($scope.product.id)
+					$scope.advert.id=data.data.id;
+					$scope.title="编辑广告";
+					console.log($scope.advert.id)
 				}else{
 					alert(JSON.stringify(data))
 				}

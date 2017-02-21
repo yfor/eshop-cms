@@ -51,6 +51,12 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 	},	{
 		name:"个",
 		id:2
+	},	{
+		name:"盒",
+		id:3
+	},	{
+		name:"箱",
+		id:4
 	}
 	]
 	$scope.product={
@@ -124,7 +130,7 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		var productData={}
 	
 		for(var i in product){
-			 if(product[i]&&(product[i].toString()==="[object FileList]"||a.join)){
+			 if(product[i]&&(product[i].toString()==="[object FileList]")){
 			 }else{
 				  productData[i]=(product[i]);
 			 }	 
