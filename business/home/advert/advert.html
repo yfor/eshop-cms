@@ -1,0 +1,95 @@
+<header class="am-topbar am-topbar-inverse admin-header" ng-include="'framework/template/header.html'">
+</header>
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+	<div class="admin-sidebar am-offcanvas" id="admin-offcanvas" ng-include="'framework/template/sidebar.html'"></div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+	<form class="am-form">
+	  <fieldset>
+		<legend>{{title}}</legend>
+		<label for="productName">目录:</label>
+	
+		<select ng-model="product.category_id" ng-options="x.id as x.name for x in productCategories"></select>	
+		<label for="productName">商品名称:</label>
+		<input type="text"  id="productName"  ng-model="product.name">
+		<div class="pre" ng-repeat = "file in product.productPicture track by $index" 
+		id="file-doc-form-productPicture{{$index}}" class="am-container"></div>
+		<div class="cc"><div>
+		<div class="am-form-group am-form-file">
+		  <button type="button" class="am-btn am-btn-default am-btn-sm">
+			<i class="am-icon-cloud-upload"></i>选择商品图片</button>
+		  <input id="doc-form-productPicture" type="file"  name="inputFile" file-model = "product.productPicture" >
+		</div>
+		<button type="button" class="am-btn am-btn-success am-btn-sm" ng-click = "uploadPicture(2,'productPicture')">
+			<i class="am-icon-cloud-upload"></i> 上传</button>
+		<br>
+		<img  ng-repeat = "file in productPicture track by $index" class="am-radius" alt="140*140" ng-src="{{serviceIP+file.document.url}}" width="140" height="140" />
+		<br>
+		<label for="productName">商品描述:</label>
+		<input type="text"  id="productName"  ng-model="product.description">
+		<br>
+		
+		<label for="productName">单位:</label>
+	
+		<select ng-model="product.unit" ng-options="x.name as x.name for x in units"></select>
+		<label for="productName">市场价:</label>
+		<input type="text"  id="productName"  ng-model="product.price">
+		<label for="productName">优惠价:</label>
+		<input type="text"  id="productName"  ng-model="product.real_price">
+		<label for="productName">库存:</label>
+		<input type="text"  id="productName"  ng-model="product.stock">
+		<hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
+		<label for="productName">轮播图:</label>
+		<div >
+		<div class="pre" ng-repeat = "file in product.productSwiperPicture track by $index" 
+		id="file-doc-form-productSwiperPicture{{$index}}" class="am-container"></div>
+		<div>
+		<div class="cc"><div>
+		<div class="am-form-group am-form-file">
+		  <button type="button" class="am-btn am-btn-default am-btn-sm">
+			<i class="am-icon-cloud-upload"></i> 选择轮播图</button>
+		  <input id="doc-form-productSwiperPicture" type="file"  name="inputFile" file-model = "product.productSwiperPicture" multiple>
+		</div>
+		<button type="button" class="am-btn am-btn-success am-btn-sm" ng-click = "uploadPicture(1,'productSwiperPicture')">
+			<i class="am-icon-cloud-upload"></i> 上传</button>
+		<br>
+		<img  ng-repeat = "file in productSwiperPicture track by $index" class="am-radius" alt="140*140" ng-src="{{serviceIP+file.document.url}}" width="140" height="140" />
+		
+		<hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
+		<label for="productName">详情图:</label>
+		<div >
+		<div class="pre" ng-repeat = "file in product.productDetailsPicture track by $index" 
+		id="file-doc-form-productDetailsPicture{{$index}}" class="am-container"></div>
+		<div>
+		<div class="cc"><div>
+		<br>
+		<div class="am-form-group am-form-file">
+		  <button type="button" class="am-btn am-btn-default am-btn-sm">
+			<i class="am-icon-cloud-upload"></i> 选择详情图</button>
+		  <input id="doc-form-productDetailsPicture" type="file"  name="inputFile" file-model = "product.productDetailsPicture" multiple >
+		</div>	
+		<button type="button" class="am-btn am-btn-success am-btn-sm" ng-click = "uploadPicture(3,'productDetailsPicture')">
+			<i class="am-icon-cloud-upload"></i> 上传</button>	
+		<br>			
+		<img  ng-repeat = "file in productDetailsPicture track by $index" class="am-radius" alt="140*140" ng-src="{{serviceIP+file.document.url}}" width="140" height="140" />
+		<p><button id="saveproduct" class="am-btn am-btn-primary " ng-click = "saveProduct()">保存</button></p>
+		
+	  </fieldset>
+	</form>
+	
+	 
+  </div>
+ <!-- content end -->
+
+</div>
+
+<a  class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<footer  ng-include="'framework/template/footer.html'">
+</footer>
+
+

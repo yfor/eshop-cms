@@ -93,6 +93,42 @@ define(["angular","ui-router"],function(angular,uirouter){
 						}
 					}
 				});
+		$stateProvider.state("adverts",{
+					url:"/adverts",
+					templateUrl:"./business/home/adverts/adverts.html",
+					controller:"adverts.ctrl",
+					resolve:{
+						deps:function($q,$rootScope){
+							var defered = $q.defer();
+							var dependiences = ["./business/home/productsList/adverts"];
+							require(dependiences,function(ctrl){
+								$rootScope.$apply(function(){
+									$controllerProvider.register("adverts.ctrl",ctrl);
+									defered.resolve();
+								});
+							});
+							return defered.promise;
+						}
+					}
+				});
+		$stateProvider.state("advert",{
+					url:"/advert?:advertId",
+					templateUrl:"./business/home/advert/advert.html",
+					controller:"advert.ctrl",
+					resolve:{
+						deps:function($q,$rootScope){
+							var defered = $q.defer();
+							var dependiences = ["./business/home/advert/advert"];
+							require(dependiences,function(ctrl){
+								$rootScope.$apply(function(){
+									$controllerProvider.register("advert.ctrl",ctrl);
+									defered.resolve();
+								});
+							});
+							return defered.promise;
+						}
+					}
+				});				
 		
 	}];
 	
