@@ -15,7 +15,7 @@ define(["amaze","framework/services/productService"],function (amaze,productServ
 		}
 		$scope.getProductList();
 
-		
+
 	$scope.delProduct= function(id){
 		ps.delProduct(id,$scope.users.setheaders).then(function(data){
 			console.log(data)

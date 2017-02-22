@@ -34,11 +34,11 @@
 		<br>
 		
 		<label for="productName">产品:</label>
-		  <select ng-model="advert.product_ids" multiple class="" >
-			<option ng-repeat="p in productList" selected value="{{p.id}}">{{p.name}}</option>
-		  </select>
-		 </div>
+		
+		<select ng-model="advert.product_ids" multiple ng-options="x.id as x.name for x in productList"></select>
 	
+		 </div>
+		
 	
 		
 		<p><button id="saveproduct" class="am-btn am-btn-primary " ng-click = "saveAdvert()">保存</button></p>

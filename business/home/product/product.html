@@ -32,14 +32,32 @@
 		<label for="productName">商品描述:</label>
 		<input type="text"  id="productName"  ng-model="product.description">
 		<br>
-		
-		<label for="productName">单位:</label>
+		</fieldset>
+	</form>
+		<label >价格:<span class="am-icon-btn am-icon-plus" ng-click = "addPrices()"></span></label>
+	<div ng-repeat = "p in product.prices track by $index" class="am-form-inline prices">
+		<fieldset>
+			<label for="productName">市场价:</label>
+			<input type="text"    ng-model="p.price">
+			<label for="productName">优惠价:</label>
+			<input type="text"   ng-model="p.real_price">
+			<label for="productName">单位:</label>
+			<select ng-model="p.unit" ng-options="x.id as x.name for x in units"></select>
+			<label for="productName">是否默认:</label>
+			<select ng-model="p.is_default" ng-options="x.id as x.name for x in isDefalut"></select>
+			<label >转换数量:</label>
+			<input type="text"  ng-model="p.display_quantity">			
+			<label >转换单位:</label>
+			<select ng-model="p.display_unit" ng-options="x.id as x.name for x in units"></select>
+			<label ng-show="p.is_default">食量:</label>
+			<input ng-show="p.is_default" type="text"  ng-model="p.eat_quantity">	
+		</fieldset>
+		<br>
+	</div>
+			
 	
-		<select ng-model="product.unit" ng-options="x.name as x.name for x in units"></select>
-		<label for="productName">市场价:</label>
-		<input type="text"  id="productName"  ng-model="product.price">
-		<label for="productName">优惠价:</label>
-		<input type="text"  id="productName"  ng-model="product.real_price">
+	<form class="am-form">
+		<fieldset>
 		<label for="productName">库存:</label>
 		<input type="text"  id="productName"  ng-model="product.stock">
 		<hr data-am-widget="divider" style="" class="am-divider am-divider-default" />

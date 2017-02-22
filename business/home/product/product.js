@@ -59,6 +59,30 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		id:4
 	}
 	]
+	$scope.isDefalut=[
+	{
+		name:"是",
+		id:true
+	},
+		{
+		name:"否",
+		id:false
+	}
+	]
+	$scope.addPrices=function(id){
+		$scope.product.prices.push(
+				{
+                "price": 1,
+                "real_price": 1,
+                "unit": 1,
+                "is_default": false,
+                "display_quantity": 2,
+                "display_unit": 1
+            }
+		)
+
+	
+	}
 	$scope.product={
 		name:"繁花·混合鲜花月套餐",
 		description:"一周一花，每月4次，精选3-5种当季花材，品种随机",
@@ -66,8 +90,18 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		real_price:172,
 		stock:1000,
 		category_id:1,
-		unit:"斤"
+		unit:"斤",
 		
+		prices:[
+				{
+                "price": 1,
+                "real_price": 1,
+                "unit": 1,
+                "is_default": true,
+                "display_quantity": 2,
+                "display_unit": 1
+            }
+		]
 	};
 
 
