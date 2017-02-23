@@ -75,9 +75,7 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
                 "price": 1,
                 "real_price": 1,
                 "unit": 1,
-                "is_default": false,
-                "display_quantity": 2,
-                "display_unit": 1
+                "is_default": false
             }
 		)
 
@@ -97,9 +95,7 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
                 "price": 1,
                 "real_price": 1,
                 "unit": 1,
-                "is_default": true,
-                "display_quantity": 2,
-                "display_unit": 1
+                "is_default": true
             }
 		]
 	};
@@ -162,10 +158,10 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 	$scope.saveProduct = function(){
 		var product = $scope.product;
 		var productData={}
-	
+		var str="name,description,stock,remark,category_id,prices,status,id"
 		for(var i in product){
-			 if(product[i]&&(product[i].toString()==="[object FileList]")){
-			 }else{
+			 if(str.indexOf(i)>-1){
+			 
 				  productData[i]=(product[i]);
 			 }	 
 		}

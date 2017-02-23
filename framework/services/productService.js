@@ -26,7 +26,7 @@ define(["angular","framework/http"],function(angular,https){
 		return this.doRequest({
 			url:"/api/v1/accounts/1/stores/1/products",
 			method:"post",
-			data:JSON.stringify(product),
+			data:JSON.stringify({product:product}),
 			headers:headers
 		});
 	}
@@ -43,7 +43,7 @@ define(["angular","framework/http"],function(angular,https){
 		return this.doRequest({
 			url:"/api/v1/accounts/1/stores/1/products"+"/"+id,
 			method:"put",
-			data:JSON.stringify(productData),
+			data:JSON.stringify({product:productData}),
 			headers:headers
 		});
 	}

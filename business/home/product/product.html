@@ -45,19 +45,17 @@
 			<select ng-model="p.unit" ng-options="x.id as x.name for x in units"></select>
 			<label for="productName">是否默认:</label>
 			<select ng-model="p.is_default" ng-options="x.id as x.name for x in isDefalut"></select>
-			<label >转换数量:</label>
-			<input type="text"  ng-model="p.display_quantity">			
-			<label >转换单位:</label>
-			<select ng-model="p.display_unit" ng-options="x.id as x.name for x in units"></select>
-			<label ng-show="p.is_default">食量:</label>
-			<input ng-show="p.is_default" type="text"  ng-model="p.eat_quantity">	
+
+	
 		</fieldset>
 		<br>
 	</div>
+
 			
 	
 	<form class="am-form">
 		<fieldset>
+
 		<label for="productName">库存:</label>
 		<input type="text"  id="productName"  ng-model="product.stock">
 		<hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
@@ -110,4 +108,20 @@
 <footer  ng-include="'framework/template/footer.html'">
 </footer>
 
-
+ <!--
+		<label >食量:</label>
+		<input  type="text"  ng-model="product.eat_quantity">	
+		<label >单位:</label>
+		<select ng-model="product.display_unit" ng-options="x.id as x.name for x in units"></select>
+		
+		
+					<label >转换数量:</label>
+			<input type="text"  ng-model="p.display_quantity">			
+			<label >转换单位:</label>
+			<select ng-model="p.display_unit" ng-options="x.id as x.name for x in units"></select>
+			
+			
+			,
+                "display_quantity": 2,
+                "display_unit": 1
+ -->				
