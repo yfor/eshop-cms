@@ -5,6 +5,7 @@ define(["amaze","framework/services/advertService"],function (amaze,advertServic
 			as.getAdvertList().then(function(data){
 				console.log(data)
 				if(data.code===0){
+					$scope.tipMessageOnLeft="广告查询";
 					$scope.advertList=data.data.adverts;
 				}else{
 					alert(JSON.stringify(data))
@@ -20,6 +21,7 @@ define(["amaze","framework/services/advertService"],function (amaze,advertServic
 		as.delAdvert(id,$scope.users.setheaders).then(function(data){
 			console.log(data)
 			if(data.code===0){
+				$scope.tipMessageOnLeft="删除广告";
 				$scope.getAdvertList();
 			}else{
 				alert(JSON.stringify(data))

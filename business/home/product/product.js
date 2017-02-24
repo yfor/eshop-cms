@@ -6,6 +6,7 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		ps.getProduct($stateParams.productId).then(function(data){
 			console.log(data)
 			if(data.code===0){
+				$scope.tipMessageOnLeft="查询产品信息";
 				$scope.product=data.data;
 				for(var i in $scope.imageType){
 					$scope[$scope.imageType[i]]=data.data.pictures[i]
@@ -69,18 +70,41 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		id:false
 	}
 	]
-	$scope.addPrices=function(id){
+	$scope.addPrices=function(){
 		$scope.product.prices.push(
 				{
                 "price": 1,
                 "real_price": 1,
                 "unit": 1,
-                "is_default": false
+                "is_default": false	,
+                "display_quantity": 2,
+                "display_unit": 1
             }
 		)
 
 	
 	}
+	$scope.addCompute_strategies=function(){
+		$scope.product.compute_strategies.push(
+            {
+                "classify": 2,
+                "average_quantity": 1,
+                "average_unit": 1,
+                "remark": "备注"
+            }
+		)
+
+	
+	}
+	
+	
+	$scope.removeCompute_strategies=function(index){
+		$scope.product.compute_strategies.splice(index,1)
+	}
+	$scope.removePrices=function(index){
+		$scope.product.prices.splice(index,1)
+	}
+	
 	$scope.product={
 		name:"繁花·混合鲜花月套餐",
 		description:"一周一花，每月4次，精选3-5种当季花材，品种随机",
@@ -95,9 +119,19 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
                 "price": 1,
                 "real_price": 1,
                 "unit": 1,
-                "is_default": true
+                "is_default": true,
+				"display_quantity": 2,
+                "display_unit": 1
             }
-		]
+		],
+		"compute_strategies": [
+            {
+                "classify": 2,
+                "average_quantity": 1,
+                "average_unit": 1,
+                "remark": "备注"
+            }
+        ]
 	};
 
 
@@ -116,6 +150,7 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 
 	 
 	$scope.uploadPicture= function(category,categoryModelStr){
+		$scope.tipMessageOnLeft="上传产品图片";
 		//多图
 		var product = $scope.product;
 		var f = new FormData();
@@ -156,9 +191,10 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		 });
 	}
 	$scope.saveProduct = function(){
+		$scope.tipMessageOnLeft="保存产品";
 		var product = $scope.product;
 		var productData={}
-		var str="name,description,stock,remark,category_id,prices,status,id"
+		var str="name,description,stock,remark,category_id,prices,status,id,compute_strategies"
 		for(var i in product){
 			 if(str.indexOf(i)>-1){
 			 

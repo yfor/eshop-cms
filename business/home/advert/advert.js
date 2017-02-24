@@ -22,7 +22,7 @@ define(["amaze","framework/services/advertService","framework/services/productSe
 						if(data.code===0){
 							$scope.advert=data.data;
 						
-
+							$scope.tipMessageOnLeft="查询广告";
 							var a=[]
 							if($scope.advert.products){
 								for(var i=0;i<$scope.advert.products.length;i++){
@@ -89,7 +89,7 @@ define(["amaze","framework/services/advertService","framework/services/productSe
 	 
 	$scope.uploadPicture= function(category,categoryModelStr){
 		//多图
-		
+		$scope.tipMessageOnLeft="广告图片上传";
 		var f = new FormData();
 		var files=$scope[categoryModelStr];
 		if(!files){
@@ -127,6 +127,7 @@ define(["amaze","framework/services/advertService","framework/services/productSe
 		 });
 	}
 	$scope.saveAdvert = function(){
+		$scope.tipMessageOnLeft="保存广告";
 		var advert = $scope.advert;
 		var advertData={}
 		/**

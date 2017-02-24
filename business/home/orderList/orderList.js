@@ -40,9 +40,8 @@ define(["amaze",
 			$scope.queryObject.end_time=$('#timeEnd').val();
 			$scope.queryObject.page=$scope.paginationConf.currentPage;
 			$scope.queryObject.per_page=$scope.paginationConf.itemsPerPage;
-			console.log($scope.queryObject)
+			$scope.tipMessageOnLeft="订单查询";
 			os.getOrderStatus($scope.queryObject).then(function(data){
-				console.log(data)
 				if(data.code===0){
 					$scope.orderList=data.data.orders;
 					$scope.paginationConf.totalItems=data.data.total_count;

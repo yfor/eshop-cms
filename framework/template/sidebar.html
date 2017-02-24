@@ -37,7 +37,17 @@
       <div class="am-panel am-panel-default admin-sidebar-panel">
         <div class="am-panel-bd">
           <p><span class="am-icon-tag"></span> Welcome</p>
-          <p>Welcome eshope!</p>
+        <div class="am-alert am-alert-success" data-am-alert ng-show="info">
+		  <button type="button" class="am-close">&times;</button>
+		  <p>{{tipMessageOnLeft}}成功</p>
+		</div>
+
+	
+
+		<div class="am-alert am-alert-danger" data-am-alert ng-show="error">
+		  <button type="button" class="am-close">&times;</button>
+		  <p>{{tipMessageOnLeft}}失败</p>
+		</div>
         </div>
       </div>
     </div>

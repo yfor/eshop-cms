@@ -11,10 +11,10 @@
 	<form class="am-form">
 	  <fieldset>
 		<legend>{{title}}</legend>
-		<label for="productName">目录:</label>
+		<label >目录:</label>
 	
 		<select ng-model="advert.category" ng-options="x.id as x.name for x in advertCategories"></select>	
-		<label for="productName">广告名称:</label>
+		<label >广告名称:</label>
 		<input type="text"  id="productName"  ng-model="advert.title">
 		<div class="pre" ng-repeat = "file in picture track by $index" 
 		id="file-doc-form-productPicture{{$index}}" class="am-container"></div>
@@ -29,11 +29,11 @@
 		<br>
 		<img  ng-repeat = "file in advert.pictures track by $index" class="am-radius" alt="140*140" ng-src="{{serviceIP+file.document.url}}" width="140" height="140" />
 		<br>
-		<label for="productName">广告描述:</label>
+		<label >广告描述:</label>
 		<input type="text"  id="productName"  ng-model="advert.description">
 		<br>
 		
-		<label for="productName">产品:</label>
+		<label >产品:</label>
 		
 		<select ng-model="advert.product_ids" multiple ng-options="x.id as x.name for x in productList"></select>
 	

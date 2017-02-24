@@ -2,8 +2,9 @@ define(["amaze","framework/services/productService"],function (amaze,productServ
 	var ctrl = ["$scope","$state","$stateParams","$http","$q",function($scope,$state, $stateParams,$http,$q){
 		var ps = new productService($q);
 		$scope.getProductList=function(){
+			
 			ps.getProductList().then(function(data){
-				console.log(data)
+				$scope.tipMessageOnLeft="查询产品列表";
 				if(data.code===0){
 					$scope.productList=data.data;
 				}else{
@@ -18,7 +19,7 @@ define(["amaze","framework/services/productService"],function (amaze,productServ
 
 	$scope.delProduct= function(id){
 		ps.delProduct(id,$scope.users.setheaders).then(function(data){
-			console.log(data)
+			$scope.tipMessageOnLeft="删除产品";
 			if(data.code===0){
 				$scope.getProductList();
 			}else{
