@@ -183,10 +183,12 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 			  transformRequest: angular.identity,
 			  headers: headers
 		   }).success(function(data){
+			    headers["Content-Type"]="application/json";
 				$scope[categoryModelStr]=data.data.pictures;
 				product[categoryModelStr]=undefined;
 			    console.log(data)
 		   }).error(function(err){
+			   headers["Content-Type"]="application/json";
 			   alert(JSON.stringify(err))
 		 });
 	}

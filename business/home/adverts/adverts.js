@@ -18,6 +18,11 @@ define(["amaze","framework/services/advertService"],function (amaze,advertServic
 
 		
 	$scope.delAdvert= function(id){
+		var r=confirm("确定删除广告!");
+		if (r==false)
+			{
+			return;
+			}
 		as.delAdvert(id,$scope.users.setheaders).then(function(data){
 			console.log(data)
 			if(data.code===0){

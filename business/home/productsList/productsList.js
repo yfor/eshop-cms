@@ -18,6 +18,12 @@ define(["amaze","framework/services/productService"],function (amaze,productServ
 
 
 	$scope.delProduct= function(id){
+		var r=confirm("确定删除产品!");
+		if (r==false)
+			{
+			return;
+			}
+
 		ps.delProduct(id,$scope.users.setheaders).then(function(data){
 			$scope.tipMessageOnLeft="删除产品";
 			if(data.code===0){

@@ -119,10 +119,12 @@ define(["amaze","framework/services/advertService","framework/services/productSe
 			  transformRequest: angular.identity,
 			  headers: headers
 		   }).success(function(data){
+			    headers["Content-Type"]="application/json";
 				console.log(data)
 				$scope[categoryModelStr]=undefined;
 				$scope.advert[categoryModelStr+"s"]=data.data.pictures;
 		   }).error(function(err){
+			   headers["Content-Type"]="application/json";
 			   alert(JSON.stringify(err))
 		 });
 	}
