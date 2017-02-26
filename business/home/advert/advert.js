@@ -3,10 +3,10 @@ define(["amaze","framework/services/advertService","framework/services/productSe
 	var as= new advertService($q);
 	var ps = new productService($q);
 	$scope.getProductList=function(){
-		ps.getProductList().then(function(data){
+		ps.getProductList({property:2}).then(function(data){
 			console.log(data)
 			if(data.code===0){
-				var d=data.data;
+				var d=data.data.products;
 				
 				var a=[]
 				
@@ -68,7 +68,8 @@ define(["amaze","framework/services/advertService","framework/services/productSe
 	$scope.advert={
 		title:"38妇女节",
 		description:"38妇女节广告节",
-		category:1
+		category:1,
+		status:0
 		
 	};
 
@@ -147,6 +148,7 @@ define(["amaze","framework/services/advertService","framework/services/productSe
 		advertData.status=advert.status;
 		advertData.category=advert.category;
 		advertData.remark=advert.remark;
+		advertData.status=advert.status;
 		var a=[]
 		for(var i in advert.product_ids){
 			

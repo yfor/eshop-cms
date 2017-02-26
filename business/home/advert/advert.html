@@ -39,7 +39,10 @@
 	
 		 </div>
 		
+		<label >状态:</label>
 	
+		<select ng-model="advert.status" ng-options="x.id as x.name for x in advertStatus"></select>	
+		
 		
 		<p><button id="saveproduct" class="am-btn am-btn-primary " ng-click = "saveAdvert()">保存</button></p>
 		

@@ -41,6 +41,15 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		id:4
 	}
 	]
+	$scope.productProperties=[
+	{
+		name:"普通商品",
+		id:1
+	},
+		{
+		name:"广告商品",
+		id:2
+	}]
 	$scope.units=[
 	{
 		name:"斤",
@@ -113,7 +122,7 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		stock:1000,
 		category_id:1,
 		unit:"斤",
-		
+		property:1,
 		prices:[
 				{
                 "price": 1,
@@ -196,7 +205,7 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		$scope.tipMessageOnLeft="保存产品";
 		var product = $scope.product;
 		var productData={}
-		var str="name,description,stock,remark,category_id,prices,status,id,compute_strategies"
+		var str="name,description,stock,remark,category_id,prices,status,id,compute_strategies,property"
 		for(var i in product){
 			 if(str.indexOf(i)>-1){
 			 

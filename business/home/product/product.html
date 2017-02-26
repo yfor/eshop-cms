@@ -12,8 +12,9 @@
 	  <fieldset>
 		<legend>{{title}}</legend>
 		<label >目录:</label>
-	
 		<select ng-model="product.category_id" ng-options="x.id as x.name for x in productCategories"></select>	
+		<label >分类:</label>
+		<select ng-model="product.property" ng-options="x.id as x.name for x in productProperties"></select>	
 		<label for="productName">商品名称:</label>
 		<input type="text"  id="productName"  ng-model="product.name">
 		<div class="pre" ng-repeat = "file in product.productPicture track by $index" 

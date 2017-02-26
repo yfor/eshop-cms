@@ -3,9 +3,13 @@ define(["angular","framework/http"],function(angular,https){
 		https.call(this,$q);
 	}
 	pdtRequest.prototype = new https();
-	pdtRequest.prototype.getProductList = function(){
+	pdtRequest.prototype.getProductList = function(query){
+		var str="?";
+		for(var i in query){
+			str+=i+"="+query[i]+"&"
+		}
 		return this.doRequest({
-			url:"/api/v1/accounts/1/stores/1/products",
+			url:"/api/v1/accounts/1/stores/1/products"+str,
 			method:"get"
 		});
 	}

@@ -6,7 +6,7 @@ define(["amaze","framework/services/productService"],function (amaze,productServ
 			ps.getProductList().then(function(data){
 				$scope.tipMessageOnLeft="查询产品列表";
 				if(data.code===0){
-					$scope.productList=data.data;
+					$scope.productList=data.data.products;
 				}else{
 					alert(JSON.stringify(data))
 				}
