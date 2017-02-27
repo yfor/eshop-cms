@@ -30,6 +30,7 @@ define(
 		$rootScope.serviceIP=cons.serviceIP;
 		$rootScope.orderStatuType=cons.orderStatuType;
 		$rootScope.advertStatus=cons.advertStatus;
+		$rootScope.units=cons.units;
 		getUserDetails();
 		function getUserDetails(){
 		var accountIns = new accountService($q);

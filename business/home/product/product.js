@@ -50,25 +50,7 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		name:"广告商品",
 		id:2
 	}]
-	$scope.units=[
-	{
-		name:"斤",
-		id:0
-	},
-		{
-		name:"份",
-		id:1
-	},	{
-		name:"个",
-		id:2
-	},	{
-		name:"盒",
-		id:3
-	},	{
-		name:"箱",
-		id:4
-	}
-	]
+
 	$scope.isDefalut=[
 	{
 		name:"是",

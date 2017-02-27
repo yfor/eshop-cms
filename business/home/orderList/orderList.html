@@ -48,10 +48,10 @@
 			<td>{{order.payment_time.replace("T"," ").substr(0,16)}}</td>
 			<td>
 			<ul>
-			<li ng-repeat = "p in order.order_details track by $indexP" >
+			<li ng-repeat = "p in order.order_details" >
 			{{p.product.name}}
 			<span class="am-badge am-badge-success am-round">
-			{{p.quantity}}{{p.product.unit}}
+			{{p.amount}}{{units[p.price.unit].name}}
 			</span>
 			</li>
 			<ul>

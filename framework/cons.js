@@ -22,5 +22,24 @@ define(function(){
 		name:"已下架",
 		id:2
 	}]	
+	cons.units=[
+	{
+		name:"斤",
+		id:0
+	},
+		{
+		name:"份",
+		id:1
+	},	{
+		name:"个",
+		id:2
+	},	{
+		name:"盒",
+		id:3
+	},	{
+		name:"箱",
+		id:4
+	}
+	]
 	return cons;
 });
