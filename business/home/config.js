@@ -128,7 +128,79 @@ define(["angular","ui-router"],function(angular,uirouter){
 							return defered.promise;
 						}
 					}
-				});				
+				});	
+		$stateProvider.state("groups",{
+					url:"/groups",
+					templateUrl:"./business/home/groups/groups.html",
+					controller:"groups.ctrl",
+					resolve:{
+						deps:function($q,$rootScope){
+							var defered = $q.defer();
+							var dependiences = ["./business/home/groups/groups"];
+							require(dependiences,function(ctrl){
+								$rootScope.$apply(function(){
+									$controllerProvider.register("groups.ctrl",ctrl);
+									defered.resolve();
+								});
+							});
+							return defered.promise;
+						}
+					}
+				});
+		$stateProvider.state("group",{
+					url:"/group?:groupId",
+					templateUrl:"./business/home/group/group.html",
+					controller:"group.ctrl",
+					resolve:{
+						deps:function($q,$rootScope){
+							var defered = $q.defer();
+							var dependiences = ["./business/home/group/group"];
+							require(dependiences,function(ctrl){
+								$rootScope.$apply(function(){
+									$controllerProvider.register("group.ctrl",ctrl);
+									defered.resolve();
+								});
+							});
+							return defered.promise;
+						}
+					}
+				});		
+		$stateProvider.state("timeLimits",{
+					url:"/timeLimits",
+					templateUrl:"./business/home/timeLimits/timeLimits.html",
+					controller:"timeLimits.ctrl",
+					resolve:{
+						deps:function($q,$rootScope){
+							var defered = $q.defer();
+							var dependiences = ["./business/home/timeLimits/timeLimits"];
+							require(dependiences,function(ctrl){
+								$rootScope.$apply(function(){
+									$controllerProvider.register("timeLimits.ctrl",ctrl);
+									defered.resolve();
+								});
+							});
+							return defered.promise;
+						}
+					}
+				});
+		$stateProvider.state("timeLimit",{
+					url:"/timeLimit?:timeLimitId",
+					templateUrl:"./business/home/timeLimit/timeLimit.html",
+					controller:"timeLimit.ctrl",
+					resolve:{
+						deps:function($q,$rootScope){
+							var defered = $q.defer();
+							var dependiences = ["./business/home/timeLimit/timeLimit"];
+							require(dependiences,function(ctrl){
+								$rootScope.$apply(function(){
+									$controllerProvider.register("timeLimit.ctrl",ctrl);
+									defered.resolve();
+								});
+							});
+							return defered.promise;
+						}
+					}
+				});						
 		
 	}];
 	

@@ -1,0 +1,67 @@
+<header class="am-topbar am-topbar-inverse admin-header" ng-include="'framework/template/header.html'">
+</header>
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+	<div class="admin-sidebar am-offcanvas" id="admin-offcanvas" ng-include="'framework/template/sidebar.html'"></div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content" >
+        <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
+        <li><a ui-sref="advert" class="am-text-success"><span class="am-icon-btn am-icon-plus"></span><br/>新增团购<br/>2300</a></li>
+		</ul>
+	<form class="am-form">
+	  <fieldset>
+		<legend>团购列表</legend>
+		<div class="am-g">
+        <div class="am-u-sm-12">
+          <table class="am-table am-table-bd am-table-striped admin-content-table">
+            <thead>
+            <tr>
+              <th>ID</th><th>图片</th><th>广告名称</th><th>广告描述</th><th>产品</th><th>编辑</th><th>删除</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat = "advert in advertList track by $index">
+			 <td>{{advert.id}}</td>
+			 <td>
+			  <img  ng-repeat = "file in advert.pictures track by $index" class="am-radius" alt="140*140" ng-src="{{serviceIP+file.document.url}}" width="40" height="40" />
+			 </td>
+			 <td>{{advert.title}}</td>
+			 <td><a >{{advert.description}}</a></td> 
+			 <td>
+			 <ul>
+				 <li>
+					<span  ng-repeat = "p in advert.products track by $index" class="am-badge am-badge-success">{{p.name}}</span>
+				 </li>
+			 </ul>
+			 </td>
+             <td>
+			  <a ui-sref="advert({ advertId: {{advert.id}} })" class="am-text-success">编辑</a>
+             </td>
+			 <td>
+				<a class="am-icon-close" ng-click = "delAdvert(advert.id)">
+				删除
+				</a>
+             </td>
+            </tr>		
+            </tbody>
+          </table>
+        </div>
+      </div>
+	</fieldset>
+	</form>
+	
+	 
+  </div>
+ <!-- content end -->
+
+</div>
+
+<a  class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<footer  ng-include="'framework/template/footer.html'">
+</footer>
+
+
