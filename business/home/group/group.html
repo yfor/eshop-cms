@@ -11,45 +11,31 @@
 	<form class="am-form">
 	  <fieldset>
 		<legend>{{title}}</legend>
-		<label >目录:</label>
-	
-		<select ng-model="advert.category" ng-options="x.id as x.name for x in advertCategories"></select>	
-		<label >广告名称:</label>
-		<input type="text"  id="productName"  ng-model="advert.title">
-		<div class="pre" ng-repeat = "file in picture track by $index" 
-		id="file-doc-form-productPicture{{$index}}" class="am-container"></div>
-		<div class="cc"><div>
-		<div class="am-form-group am-form-file">
-		  <button type="button" class="am-btn am-btn-default am-btn-sm">
-			<i class="am-icon-cloud-upload"></i>选择广告图片</button>
-		  <input id="doc-form-productPicture" type="file"  name="inputFile" file-model = "picture" >
-		</div>
-		<button type="button" class="am-btn am-btn-success am-btn-sm" ng-click = "uploadPicture(1,'picture')">
-			<i class="am-icon-cloud-upload"></i> 上传</button>
-		<br>
-		<img  ng-repeat = "file in advert.pictures track by $index" class="am-radius" alt="140*140" ng-src="{{serviceIP+file.document.url}}" width="140" height="140" />
-		<br>
-		<label >广告描述:</label>
-		<input type="text"  id="productName"  ng-model="advert.description">
-		<br>
-		
-		<label >产品:</label>
-		
-		<select ng-model="advert.product_ids" multiple ng-options="x.id as x.name for x in productList"></select>
-	
-		 </div>
-		
-		<label >状态:</label>
-	
-		<select ng-model="advert.status" ng-options="x.id as x.name for x in advertStatus"></select>	
-		
-		
-		<p><button id="saveproduct" class="am-btn am-btn-primary " ng-click = "saveAdvert()">保存</button></p>
-		
+
+			<label >团购信息:</label>
+			<div  class="am-form-inline ">
+				<fieldset>
+					
+					<label >目标数量:</label>
+					<input type="number"    ng-model="product.group_buying.target_amount">
+					<label >开始时间:</label>
+					<input type="text"    class="form-datetime" ng-model="product.group_buying.begin_time">		
+					<label >结束时间:</label>
+					<input type="text"  class=" form-datetime"  ng-model="product.group_buying.end_time">	
+							
+				</fieldset>		
+				<label >最少购买:</label>
+				<input type="text"    ng-model="product.group_buying.limit_min">	
+				<label >最多购买:</label>
+				<input type="text"    ng-model="product.group_buying.limit_max">					
+				<br>
+				完成比例{{product.group_buying.completion_rate}}
+				已完成数量{{product.group_buying.current_amount}}
+				已参加人数{{product.group_buying.current_number}}
+			</div> 
 	  </fieldset>
-	</form>
-	
-	 
+	</form>			
+	<p><button id="saveproduct" class="am-btn am-btn-primary " ng-click = "saveProduct()">保存</button></p>
   </div>
  <!-- content end -->
 
@@ -59,5 +45,4 @@
 
 <footer  ng-include="'framework/template/footer.html'">
 </footer>
-
-
+			

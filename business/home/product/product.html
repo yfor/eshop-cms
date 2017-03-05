@@ -14,7 +14,7 @@
 		<label >目录:</label>
 		<select ng-model="product.category_id" ng-options="x.id as x.name for x in productCategories"></select>	
 		<label >分类:</label>
-		<select ng-model="product.property" ng-options="x.id as x.name for x in productProperties"></select>	
+		<select ng-model="product.property" ng-click="initDate()" ng-options="x.id as x.name for x in productProperties"></select>	
 		<label for="productName">商品名称:</label>
 		<input type="text"  id="productName"  ng-model="product.name">
 		<div class="pre" ng-repeat = "file in product.productPicture track by $index" 
@@ -119,8 +119,28 @@
 			<input type="text"  ng-model="p.remark">			
 			<label ><span class=" am-icon-minus" ng-click = "removeCompute_strategies($index)"></span></label>
 		</fieldset>
-		<br>
-	</div> 
+	</div>
+			<label ng-show="product.property===3">团购信息:</label>
+			<div  ng-show="product.property===3" class="am-form-inline ">
+				<fieldset>
+					
+					<label >目标数量:</label>
+					<input type="number"    ng-model="product.group_buying.target_amount">
+					<label >开始时间:</label>
+					<input type="text"    class="form-datetime" ng-model="product.group_buying.begin_time">		
+					<label >结束时间:</label>
+					<input type="text"  class=" form-datetime"  ng-model="product.group_buying.end_time">	
+							
+				</fieldset>		
+				<label >最少购买:</label>
+				<input type="text"    ng-model="product.group_buying.limit_min">	
+				<label >最多购买:</label>
+				<input type="text"    ng-model="product.group_buying.limit_max">					
+				<br>
+				完成比例{{product.group_buying.completion_rate}}
+				已完成数量{{product.group_buying.current_amount}}
+				已参加人数{{product.group_buying.current_number}}
+			</div> 
   </div>
  <!-- content end -->
 
@@ -131,11 +151,4 @@
 <footer  ng-include="'framework/template/footer.html'">
 </footer>
 
- <!--
-		<label >食量:</label>
-		<input  type="text"  ng-model="product.eat_quantity">	
-		<label >单位:</label>
-		<select ng-model="product.display_unit" ng-options="x.id as x.name for x in units"></select>
-
-
- -->				
+				

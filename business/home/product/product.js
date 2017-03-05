@@ -7,7 +7,15 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 			console.log(data)
 			if(data.code===0){
 				$scope.tipMessageOnLeft="查询产品信息";
-				$scope.product=data.data;
+				var product=data.data;
+				if(product.group_buying){
+					product.group_buying.begin_time=new Date(product.group_buying.begin_time).Format("yyyy-MM-dd hh:mm:ss");
+					product.group_buying.end_time=new Date(product.group_buying.end_time).Format("yyyy-MM-dd hh:mm:ss");
+				}
+			
+				
+				
+				$scope.product=product;
 				for(var i in $scope.imageType){
 					$scope[$scope.imageType[i]]=data.data.pictures[i]
 				}
@@ -49,6 +57,14 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		{
 		name:"广告商品",
 		id:2
+	},
+	{
+		name:"团购商品",
+		id:3
+	},
+		{
+		name:"秒杀商品",
+		id:4
 	}]
 
 	$scope.isDefalut=[
@@ -122,7 +138,15 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
                 "average_unit": 1,
                 "remark": "备注"
             }
-        ]
+        ],
+		
+		"group_buying": {
+            "target_amount": 100.2,
+            "begin_time": "2017-03-04 16:51",
+            "end_time": "2017-03-08 16:50",
+            "limit_min": 2,
+            "limit_max": 5
+        }
 	};
 
 
@@ -187,13 +211,14 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		$scope.tipMessageOnLeft="保存产品";
 		var product = $scope.product;
 		var productData={}
-		var str="name,description,stock,remark,category_id,prices,status,id,compute_strategies,property"
+		var str="name,description,stock,remark,category_id,prices,status,id,compute_strategies,property,group_buying";
 		for(var i in product){
 			 if(str.indexOf(i)>-1){
 			 
 				  productData[i]=(product[i]);
 			 }	 
 		}
+	
 		//upload
 		if($scope.product.id){
 			ps.updateProduct(productData,$scope.users.setheaders).then(function(data){
@@ -222,7 +247,15 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		}
 	}
 
-
+	$scope.initDate = function(){
+		var $dpInput = $('.form-datetime').datetimepicker({
+			language:  'zh-CN',
+			format: 'yyyy-mm-dd hh:ii',
+			autoclose: true,
+			todayBtn: true
+		});
+	}
+	$scope.initDate();
 	}];
 	return ctrl;
 });

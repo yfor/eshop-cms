@@ -1,12 +1,12 @@
-define(["amaze","framework/services/advertService"],function (amaze,advertService){
+define(["amaze","framework/services/panic_buyingService"],function (amaze,panic_buyingService){
 	var ctrl = ["$scope","$state","$stateParams","$http","$q",function($scope,$state, $stateParams,$http,$q){
-		var as = new advertService($q);
-		$scope.getAdvertList=function(){
-			as.getAdvertList().then(function(data){
+		var as = new panic_buyingService($q);
+		$scope.getPanic_buyingServiceList=function(){
+			as.getPanic_buyingServiceList().then(function(data){
 				console.log(data)
 				if(data.code===0){
-					$scope.tipMessageOnLeft="广告查询";
-					$scope.advertList=data.data.adverts;
+					$scope.tipMessageOnLeft="限时购查询";
+					$scope.panic_buyings=data.data.panic_buyings;
 				}else{
 					alert(JSON.stringify(data))
 				}
@@ -14,11 +14,11 @@ define(["amaze","framework/services/advertService"],function (amaze,advertServic
 					alert(JSON.stringify(err))
 		});	
 		}
-		$scope.getAdvertList();
+		$scope.getPanic_buyingServiceList();
 
 		
-	$scope.delAdvert= function(id){
-		var r=confirm("确定删除广告!");
+	$scope.delpanic_buying= function(id){
+		var r=confirm("确定删除限时购!");
 		if (r==false)
 			{
 			return;
@@ -26,8 +26,8 @@ define(["amaze","framework/services/advertService"],function (amaze,advertServic
 		as.delAdvert(id,$scope.users.setheaders).then(function(data){
 			console.log(data)
 			if(data.code===0){
-				$scope.tipMessageOnLeft="删除广告";
-				$scope.getAdvertList();
+				$scope.tipMessageOnLeft="删除限时购";
+				$scope.getPanic_buyingServiceList();
 			}else{
 				alert(JSON.stringify(data))
 			}

@@ -1,12 +1,12 @@
-define(["amaze","framework/services/advertService"],function (amaze,advertService){
+define(["amaze","framework/services/productService"],function (amaze,productService){
 	var ctrl = ["$scope","$state","$stateParams","$http","$q",function($scope,$state, $stateParams,$http,$q){
-		var as = new advertService($q);
-		$scope.getAdvertList=function(){
-			as.getAdvertList().then(function(data){
-				console.log(data)
+		var ps = new productService($q);
+		$scope.getProductList=function(){
+			
+			ps.getProductList({property:3}).then(function(data){
+				$scope.tipMessageOnLeft="查询产品列表";
 				if(data.code===0){
-					$scope.tipMessageOnLeft="广告查询";
-					$scope.advertList=data.data.adverts;
+					$scope.productList=data.data.products;
 				}else{
 					alert(JSON.stringify(data))
 				}
@@ -14,20 +14,20 @@ define(["amaze","framework/services/advertService"],function (amaze,advertServic
 					alert(JSON.stringify(err))
 		});	
 		}
-		$scope.getAdvertList();
+		$scope.getProductList();
 
-		
-	$scope.delAdvert= function(id){
-		var r=confirm("确定删除广告!");
+
+	$scope.delProduct= function(id){
+		var r=confirm("确定删除产品!");
 		if (r==false)
 			{
 			return;
 			}
-		as.delAdvert(id,$scope.users.setheaders).then(function(data){
-			console.log(data)
+
+		ps.delProduct(id,$scope.users.setheaders).then(function(data){
+			$scope.tipMessageOnLeft="删除产品";
 			if(data.code===0){
-				$scope.tipMessageOnLeft="删除广告";
-				$scope.getAdvertList();
+				$scope.getProductList();
 			}else{
 				alert(JSON.stringify(data))
 			}
