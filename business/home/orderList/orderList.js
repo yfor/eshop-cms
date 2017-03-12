@@ -36,12 +36,19 @@ define(["amaze",
 		var os = new orderService($q);
 		//queryObject
 		$scope.getOrders=function(){
-			$scope.queryObject.begin_time=$('#timeStart').val();
-			$scope.queryObject.end_time=$('#timeEnd').val();
-			$scope.queryObject.page=$scope.paginationConf.currentPage;
-			$scope.queryObject.per_page=$scope.paginationConf.itemsPerPage;
+
 			$scope.tipMessageOnLeft="订单查询";
-			os.getOrderStatus($scope.queryObject).then(function(data){
+			var queryObject=$scope.queryObject;
+			if($scope.isNeedPro){
+				var queryObject={
+					type:"untreated"
+				};
+			}
+			queryObject.begin_time=$('#timeStart').val();
+			queryObject.end_time=$('#timeEnd').val();
+			queryObject.page=$scope.paginationConf.currentPage;
+			queryObject.per_page=$scope.paginationConf.itemsPerPage;
+			os.getOrderStatus(queryObject).then(function(data){
 				if(data.code===0){
 					$scope.orderList=data.data.orders;
 					$scope.paginationConf.totalItems=data.data.total_count;
@@ -57,44 +64,27 @@ define(["amaze",
 				alert(JSON.stringify(err))
 			});
 		}
-		$scope.getNeedProOrders=function(){
-			$scope.queryObject.begin_time=$('#timeStart').val();
-			$scope.queryObject.end_time=$('#timeEnd').val();
-			$scope.queryObject.page=$scope.paginationConf.currentPage;
-			$scope.queryObject.per_page=$scope.paginationConf.itemsPerPage;
-			$scope.tipMessageOnLeft="订单查询";
-			os.getOrderStatus($scope.queryObject).then(function(data){
+		$scope.isNeedPro=true;
+		$scope.setQueryType=function(){
+			$scope.isNeedPro=!$scope.isNeedPro;
+		}		
+		$scope.getOrders()
+		$scope.closeOrder= function(id,$event){
+			$scope.tipMessageOnLeft="修改订单";
+			$event.stopPropagation()
+			var order={}
+			order.status=3;
+			os.closeOrder(id,order,$scope.users.setheaders).then(function(data){
+				console.log(data)
 				if(data.code===0){
-					$scope.orderList=data.data.orders;
-					$scope.paginationConf.totalItems=data.data.total_count;
+					//$scope.getOrders();
 				}else{
-					$scope.orderList=[];
-					$scope.paginationConf.totalItems=0;
 					alert(JSON.stringify(data))
 				}
-
 			},function(err){
-				$scope.orderList=[];
-				$scope.paginationConf.totalItems=0;
 				alert(JSON.stringify(err))
 			});
-		}		
-		$scope.getNeedProOrders()
-		$scope.closeOrder= function(id,order,$event){
-		$event.stopPropagation()
-		order.status=3;
-		os.closeOrder(id,order,$scope.users.setheaders).then(function(data){
-			
-			console.log(data)
-			if(data.code===0){
-				//$scope.getOrders();
-			}else{
-				alert(JSON.stringify(data))
-			}
-		},function(err){
-				alert(JSON.stringify(err))
-	});
-	}
+		}
 	}
 
 	];

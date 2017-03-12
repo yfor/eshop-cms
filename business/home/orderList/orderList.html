@@ -15,10 +15,11 @@
 		<label >状态：</label>
 		</div>
 		<div class="am-form-group">
-		<select ng-model="queryObject.status" ng-options="x for (x, y) in  orderStatuTypeMap"></select>	
+		<select ng-disabled="isNeedPro" ng-model="queryObject.status" ng-options="x for (x, y) in  orderStatuTypeMap"></select>	
 		</div>
+		<button  ng-click="setQueryType()" class="am-btn am-btn-{{isNeedPro?'primary':'default'}}">待处理</button>
 		<div class="am-form-group">
-		<label >支付时间起止：</label>
+		<label >创建时间起止：</label>
 		</div>
 		<div class="am-form-group">
 			<input id="timeStart" size="16" type="text"  readonly class="form-datetime am-form-field">
@@ -26,8 +27,9 @@
 		<div class="am-form-group">
 			<input id="timeEnd" size="16" type="text"  readonly class="form-datetime am-form-field">
 		</div>
-		<button  ng-click="getOrders()" class="am-btn am-btn-default">查询</button>
-		<button  ng-click="getOrders()" class="am-btn am-btn-default">待处理订单</button>
+		
+		<button  ng-click="getOrders()" class="am-btn am-btn-success">查询</button>
+		
 	</fieldset>
 	</form>
 	<div class="am-g">
@@ -37,7 +39,8 @@
             <thead>
             <tr>						
               <th>订单编号</th><th>支付总额</th>
-			  <th>支付时间</th>
+			  
+			  <th>配送时间</th>
 			  <th>产品信息</th><th>客户信息</th>
 			  <th>状态</th><th>发货</th><th>查看</th>
             </tr>
@@ -46,19 +49,19 @@
             <tr  ng-repeat = "order in orderList track by $index">
 			<td>{{order.order_number}}</td>
 			<td>{{order.pay_price}}元</td>
-			<td>{{order.payment_time.replace("T"," ").substr(0,16)}}</td>
+			<td>{{order.delivery_time.replace("T"," ").substr(0,16)}}</td>
 			<td>
 			<ul>
 			<li ng-repeat = "p in order.order_details" >
-			{{p.product.name}}
+			{{p.product_name}}
 			<span class="am-badge am-badge-success am-round">
-			{{p.amount}}{{units[p.price.unit].name}}
+			{{p.amount}}{{units[p.product_unit].name}}
 			</span>
 			
 				<div ng-repeat = "s in p.subitems" >
-				{{s.product.name}}
+				{{s.product_name}}
 				<span class="am-badge am-badge-success am-round">
-				{{s.amount}}{{units[s.price.unit].name}}
+				{{s.amount}}{{units[s.product_unit].name}}
 				</span>
 				</div>	
 			
@@ -73,13 +76,13 @@
 			</td>
 			<td>
 			{{orderStatuType[order.status]}}
-			
+			{{order.payment_time.replace("T"," ").substr(0,16)}}
 				<span class="am-badge am-badge-success am-round">
 					{{pay_awayType[order.pay_away]}}
 				</span>
 			</td>
             <td>
-				<button ng-show="order.status==2||(order.status==1&&order.pay_away==2)" type="button" class="am-btn am-btn-success" ng-click = "closeOrder(order.id,order,$event)">发货</button>
+				<button ng-show="order.status==2||(order.status==1&&order.pay_away==2)" type="button" class="am-btn am-btn-success" ng-click = "closeOrder(order.id,$event)">发货</button>
 			</td>
 			<td>
 				<a ui-sref="order({ orderId: {{order.id}} })">详情</a>

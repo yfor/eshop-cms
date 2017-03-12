@@ -1,4 +1,4 @@
-define(["amaze","framework/services/panic_buyingService","framework/services/productService","uploadPreview"],function (amaze,panic_buyingService,productService,uploadPreview){
+define(["amaze","framework/services/panic_buyingService","framework/services/productService"],function (amaze,panic_buyingService,productService){
 	var ctrl = ["$scope","$state","$stateParams","$http","$q",function($scope,$state, $stateParams,$http,$q){
 	var as= new panic_buyingService($q);
 	var ps = new productService($q);

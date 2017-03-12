@@ -20,9 +20,9 @@ define(["amaze","framework/services/panic_buyingService"],function (amaze,panic_
 	$scope.delpanic_buying= function(id){
 		var r=confirm("确定删除限时购!");
 		if (r==false)
-			{
+		{
 			return;
-			}
+		}
 		as.delAdvert(id,$scope.users.setheaders).then(function(data){
 			console.log(data)
 			if(data.code===0){
@@ -33,7 +33,7 @@ define(["amaze","framework/services/panic_buyingService"],function (amaze,panic_
 			}
 		},function(err){
 				alert(JSON.stringify(err))
-	});	
+		});	
 	}
 	}
 	];

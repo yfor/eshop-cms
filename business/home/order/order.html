@@ -22,9 +22,15 @@
 						<td colspan="3" style="width:440px;" class="detail_title_value">{{order.order_number}}</td>
 					</tr>
 					<tr height="50">
-						<td class="detail_title_name">订单时间：</td>
+						<td class="detail_title_name">订单更新时间：</td>
 						<td class="detail_title_value">
 							{{order.updated_at.replace("T"," ").substr(0,16)}}
+						</td>
+					</tr>
+					<tr height="50">
+						<td class="detail_title_name">配送时间：</td>
+						<td class="detail_title_value">
+							{{order.delivery_time.replace("T"," ").substr(0,16)}}
 						</td>
 					</tr>
 					<tr height="50">
@@ -69,15 +75,18 @@
 
 					<ul>
 					<li ng-repeat = "p in order.order_details" >
-					{{p.product.name}}
+					{{p.product_name}}
+					<span class="am-badge am-badge-warring am-round">
+					￥{{p.product_price}}
+					</span>
 					<span class="am-badge am-badge-success am-round">
-					{{p.amount}}{{units[p.price.unit].name}}
+					{{p.amount}}{{units[p.product_unit].name}}
 					</span>
 					
 						<div ng-repeat = "s in p.subitems" >
-						{{s.product.name}}
+						{{s.product_name}}
 						<span class="am-badge am-badge-success am-round">
-						{{s.amount}}{{units[s.price.unit].name}}
+						{{s.amount}}{{units[s.product_unit].name}}
 						</span>
 						</div>	
 					

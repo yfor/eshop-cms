@@ -8,7 +8,6 @@ define(
 	"framework/services/orderService",
 	"framework/cons",
 	"datetimepicker"
-	
 	],
 	function(angularl,uirouter,amaze,frwork,config,accountService,orderService,cons,datetimepicker){
 	var con = ["$scope","$state","$rootScope",function($scope,$state,$rootScope){
@@ -81,19 +80,17 @@ define(
 		};
 		var os = new orderService($q);
 		$rootScope.number=0;
+
+		
+	$rootScope.tippEdOrder={}
+	$interval(function(){
 		$rootScope.lastRefreshTimeInput=$('<input id="lastRefreshTime" size="16" type="text"  readonly class="form-datetime am-form-field">')
 		.datetimepicker({
 			language:  'zh-CN',
 			format: 'yyyy-mm-dd hh:ii',
 			autoclose: true,
 			todayBtn: true
-		});
-		
-	$rootScope.tippEdOrder={}
-	$interval(function(){
-		var queryObject={
-			status:"2"
-		};
+		});		
 		var nowBeforeDay=new Date()
 		nowBeforeDay.setDate(nowBeforeDay.getDate()-1)
 		$rootScope.lastRefreshTimeInput.datetimepicker('update',nowBeforeDay);
@@ -108,31 +105,16 @@ define(
 		nowAfterDay.setDate(nowAfterDay.getDate()+1)
 		$rootScope.lastRefreshTimeEndInput.datetimepicker('update',nowAfterDay);
 		
-		
-		
+		var queryObject={
+			type:"untreated"
+		};
 		queryObject.begin_time=$rootScope.lastRefreshTimeInput.val();
 		queryObject.end_time=$rootScope.lastRefreshTimeEndInput.val();
 		os.getOrderStatus(queryObject).then(function(data){
 			if(data.code===0){
 				var orders=data.data.orders;
-				queryObject.status=1;	
-				queryObject.pay_away=2;
-				os.getOrderStatus(queryObject).then(function(data){
-					console.log(data)
-					if(data.code===0){
-						orders=orders.concat(data.data.orders);
-						proTips(orders);
-						
-						
-					}else{
-						$rootScope.number=0;
-						alert(JSON.stringify(data))
-					}
+				proTips(orders);
 
-				},function(err){
-					$rootScope.number=0;
-					alert(JSON.stringify(err))
-				});
 				
 			}else{
 				$rootScope.number=0;
@@ -146,7 +128,7 @@ define(
 
    
 
-	},1000*60*3);//3分钟 *60*3
+	},1000*60*3);//3分钟 
 		
 		
 	function proTips(orders){

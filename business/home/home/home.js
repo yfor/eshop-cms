@@ -1,4 +1,4 @@
-define(["amaze","framework/services/homeService","framework/services/productService","uploadPreview"],function (amaze,homeService,productService,uploadPreview){
+define(["amaze","framework/services/homeService","framework/services/productService"],function (amaze,homeService,productService){
 	var ctrl = ["$scope","$state","$stateParams","$http","$q",function($scope,$state, $stateParams,$http,$q){
 	var ss= new homeService($q);
 	var ps = new productService($q);

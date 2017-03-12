@@ -7,7 +7,6 @@ require.config({
 		"amaze":"http://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min",
 		"uploadPreview":"lib/uploadPreview",
 		"datetimepicker":"lib/amaze/js/amazeui.datetimepicker"
-		
 	},
 
 	shim:{
