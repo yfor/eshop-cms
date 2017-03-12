@@ -39,7 +39,7 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		id:1
 	},
 		{
-		name:"个人套餐",
+		name:"果切",
 		id:2
 	},	{
 		name:"企业套餐",
@@ -121,6 +121,7 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		category_id:1,
 		unit:"斤",
 		property:1,
+		status:0,
 		prices:[
 				{
                 "price": 1,

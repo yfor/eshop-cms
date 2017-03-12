@@ -11,8 +11,9 @@
 	<form class="am-form">
 	  <fieldset>
 		<legend>订单详情</legend>
-		order
+		
 		<body>
+			<button ng-show="order.status==2||(order.status==1&&order.pay_away==2)" type="button" class="am-btn am-btn-success" ng-click = "printOrder(order.id)">打印订单</button>
 			<div class="detail_title">订单详情信息</div>
 			<div>
 				<table>
@@ -29,16 +30,17 @@
 					<tr height="50">
 						<td class="detail_title_name">订单状态：</td>
 						<td class="detail_title_value" colspan="3">
-							
-								
-								{{orderStatuType[order.status]}}
-								
-								
-								
-							
+							{{orderStatuType[order.status]}}
 						</td>
 						
 					</tr>
+					<tr height="50">
+						<td class="detail_title_name">支付方式：</td>
+						<td class="detail_title_value" colspan="3">
+							{{pay_awayType[order.pay_away]}}
+						</td>
+						
+					</tr>					
 					<tr height="50">
 						<td class="detail_title_name">订单总额：</td>
 						<td class="detail_title_value" colspan="3"> {{order.total_price}}&nbsp;元</td>
@@ -64,12 +66,24 @@
 			</div>
 			<div class="detail_title">商品信息</div>
 			<div>
-				<table width="80%" align="center">
-					<tbody><tr height="50">
-						<th>序号</th><th>名称</th><th>图片</th><th>单价</th><th>数量</th>
-					</tr>
+
+					<ul>
+					<li ng-repeat = "p in order.order_details" >
+					{{p.product.name}}
+					<span class="am-badge am-badge-success am-round">
+					{{p.amount}}{{units[p.price.unit].name}}
+					</span>
 					
-				</tbody></table>
+						<div ng-repeat = "s in p.subitems" >
+						{{s.product.name}}
+						<span class="am-badge am-badge-success am-round">
+						{{s.amount}}{{units[s.price.unit].name}}
+						</span>
+						</div>	
+					
+					</li>
+					<ul>					
+
 			</div>				
 			<div class="detail_title">收货信息</div>
 			<div>
@@ -80,11 +94,11 @@
 					</tr>
 						<tr height="50">
 						<td class="detail_title_name">收货人：</td>
-						<td class="detail_title_value" colspan="3"> </td>
+						<td class="detail_title_value" colspan="3"> {{order.consignee_name}}</td>
 					</tr>
 						<tr height="50">
 						<td class="detail_title_name">电话：</td>
-						<td class="detail_title_value" colspan="3"> </td>
+						<td class="detail_title_value" colspan="3"> {{order.consignee_phone}}</td>
 					</tr>
 				</tbody></table>
 			</div>				

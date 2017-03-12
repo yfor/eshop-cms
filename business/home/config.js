@@ -200,7 +200,25 @@ define(["angular","ui-router"],function(angular,uirouter){
 							return defered.promise;
 						}
 					}
-				});						
+				});	
+		$stateProvider.state("home",{
+					url:"/home",
+					templateUrl:"./business/home/home/home.html",
+					controller:"home.ctrl",
+					resolve:{
+						deps:function($q,$rootScope){
+							var defered = $q.defer();
+							var dependiences = ["./business/home/home/home"];
+							require(dependiences,function(ctrl){
+								$rootScope.$apply(function(){
+									$controllerProvider.register("home.ctrl",ctrl);
+									defered.resolve();
+								});
+							});
+							return defered.promise;
+						}
+					}
+				});					
 		
 	}];
 	

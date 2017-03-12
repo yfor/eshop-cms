@@ -20,6 +20,14 @@ define(["angular","framework/http"],function(angular,https){
 			method:"get"
 		});
 	}
+	ordersReq.prototype.printOrder = function(id,headers){
+		
+		return this.doRequest({
+			url:"/api/v1/orders/"+ id + "/print",
+			method:"post",
+			headers:headers
+		});
+	}	
 	ordersReq.prototype.closeOrder = function(id,data,headers){
 	
 		return this.doRequest({

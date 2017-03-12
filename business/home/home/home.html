@@ -1,0 +1,38 @@
+<header class="am-topbar am-topbar-inverse admin-header" ng-include="'framework/template/header.html'">
+</header>
+
+<div class="am-cf admin-main">
+  <!-- sidebar start -->
+	<div class="admin-sidebar am-offcanvas" id="admin-offcanvas" ng-include="'framework/template/sidebar.html'"></div>
+  <!-- sidebar end -->
+
+  <!-- content start -->
+  <div class="admin-content">
+	<form class="am-form">
+	  <fieldset>
+		<legend>{{title}}</legend>
+		
+		<label >单品:</label>
+		<select ng-model="productList_danpin_ids" multiple ng-options="x.id as x.name for x in productList_danpin"></select>
+		<label >果切:</label>
+		<select ng-model="productList_guoqie_ids" multiple ng-options="x.id as x.name for x in productList_guoqie"></select>
+		<label >团购:</label>
+		<select ng-model="productList_tuangou_ids" multiple ng-options="x.id as x.name for x in productList_tuangou"></select>
+		
+		<p><button id="saveproduct" class="am-btn am-btn-primary " ng-click = "saveproduct()">保存</button></p>
+		
+	  </fieldset>
+	</form>
+	
+	 
+  </div>
+ <!-- content end -->
+
+</div>
+
+<a  class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+<footer  ng-include="'framework/template/footer.html'">
+</footer>
+
+

@@ -27,6 +27,7 @@
 			<input id="timeEnd" size="16" type="text"  readonly class="form-datetime am-form-field">
 		</div>
 		<button  ng-click="getOrders()" class="am-btn am-btn-default">查询</button>
+		<button  ng-click="getOrders()" class="am-btn am-btn-default">待处理订单</button>
 	</fieldset>
 	</form>
 	<div class="am-g">
@@ -53,6 +54,14 @@
 			<span class="am-badge am-badge-success am-round">
 			{{p.amount}}{{units[p.price.unit].name}}
 			</span>
+			
+				<div ng-repeat = "s in p.subitems" >
+				{{s.product.name}}
+				<span class="am-badge am-badge-success am-round">
+				{{s.amount}}{{units[s.price.unit].name}}
+				</span>
+				</div>	
+			
 			</li>
 			<ul>
 			</td>
@@ -62,9 +71,15 @@
 			<span class="am-badge am-badge-primary  am-radius">{{order.consignee_name}}</span>
 			<span class="am-badge am-badge-secondary am-round">{{order.consignee_phone}}</span>
 			</td>
-			<td>{{orderStatuType[order.status]}}</td>
+			<td>
+			{{orderStatuType[order.status]}}
+			
+				<span class="am-badge am-badge-success am-round">
+					{{pay_awayType[order.pay_away]}}
+				</span>
+			</td>
             <td>
-				<button ng-show="order.status==2" type="button" class="am-btn am-btn-success" ng-click = "closeOrder(order.id,order,$event)">发货</button>
+				<button ng-show="order.status==2||(order.status==1&&order.pay_away==2)" type="button" class="am-btn am-btn-success" ng-click = "closeOrder(order.id,order,$event)">发货</button>
 			</td>
 			<td>
 				<a ui-sref="order({ orderId: {{order.id}} })">详情</a>

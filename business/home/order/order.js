@@ -17,7 +17,18 @@ define(["amaze","framework/services/orderService","uploadPreview"],function (ama
 	}else{
 		alert("orderId is needed!")
 	}
-
+	$scope.printOrder=function(){
+		os.printOrder($stateParams.orderId,$scope.users.setheaders).then(function(data){
+			console.log(data)
+			if(data.code===0){
+				$scope.tipMessageOnLeft="订单打印成功";
+			}else{
+				alert(JSON.stringify(data))
+			}
+		},function(err){
+				alert(JSON.stringify(err))
+		});			
+	}
 	}];
 	return ctrl;
 });

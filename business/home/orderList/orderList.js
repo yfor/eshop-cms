@@ -56,8 +56,30 @@ define(["amaze",
 				$scope.paginationConf.totalItems=0;
 				alert(JSON.stringify(err))
 			});
+		}
+		$scope.getNeedProOrders=function(){
+			$scope.queryObject.begin_time=$('#timeStart').val();
+			$scope.queryObject.end_time=$('#timeEnd').val();
+			$scope.queryObject.page=$scope.paginationConf.currentPage;
+			$scope.queryObject.per_page=$scope.paginationConf.itemsPerPage;
+			$scope.tipMessageOnLeft="订单查询";
+			os.getOrderStatus($scope.queryObject).then(function(data){
+				if(data.code===0){
+					$scope.orderList=data.data.orders;
+					$scope.paginationConf.totalItems=data.data.total_count;
+				}else{
+					$scope.orderList=[];
+					$scope.paginationConf.totalItems=0;
+					alert(JSON.stringify(data))
+				}
+
+			},function(err){
+				$scope.orderList=[];
+				$scope.paginationConf.totalItems=0;
+				alert(JSON.stringify(err))
+			});
 		}		
-		$scope.getOrders()
+		$scope.getNeedProOrders()
 		$scope.closeOrder= function(id,order,$event){
 		$event.stopPropagation()
 		order.status=3;

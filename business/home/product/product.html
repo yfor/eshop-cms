@@ -103,7 +103,9 @@
 		
 	  </fieldset>
 	</form>
+			<label >状态:</label>
 	
+		<select ng-model="product.status" ng-options="x.id as x.name for x in productStatus"></select>	
 			<label >计算策略:<span class="am-icon-btn am-icon-plus" ng-click = "addCompute_strategies()"></span></label>
 	<div ng-repeat = "p in product.compute_strategies track by $index" class="am-form-inline prices">
 		<fieldset>

@@ -8,7 +8,10 @@ define(function(){
 			3:"已发货",
 			9:"已完成"
 		}
-
+	cons.pay_awayType={
+			1:"微信支付",
+			2:"货到付款"
+		}
 	cons.advertStatus=[
 	{
 		name:"未投放",
@@ -22,6 +25,15 @@ define(function(){
 		name:"已下架",
 		id:2
 	}]	
+	cons.productStatus=[
+	{
+		name:"上架",
+		id:0
+	},
+		{
+		name:"下架",
+		id:1
+	}]		
 	cons.units=[
 	{
 		name:"斤",
