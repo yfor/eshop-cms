@@ -1,6 +1,6 @@
 define(["amaze",
 	"framework/services/orderService","datetimepicker"],function (amaze,orderService,datetimepicker){
-	var ctrl = ["$scope","$state","$stateParams","$http","$q",function($scope,$state, $stateParams,$http,$q){
+	var ctrl = ["$scope","$state","$stateParams","$http","$q","$rootScope",function($scope,$state, $stateParams,$http,$q,$rootScope){
 		var $dpInput = $('.form-datetime').datetimepicker({
 			language:  'zh-CN',
 			format: 'yyyy-mm-dd hh:ii',
@@ -68,7 +68,7 @@ define(["amaze",
 		$scope.setQueryType=function(){
 			$scope.isNeedPro=!$scope.isNeedPro;
 		}		
-		$scope.getOrders()
+		$scope.getOrders();
 		$scope.closeOrder= function(id,$event){
 			$scope.tipMessageOnLeft="修改订单";
 			$event.stopPropagation()

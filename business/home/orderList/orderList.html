@@ -48,7 +48,7 @@
             <tbody>
             <tr  ng-repeat = "order in orderList track by $index">
 			<td>{{order.order_number}}</td>
-			<td>{{order.pay_price}}元</td>
+			<td><span class="am-icon-jpy"> {{order.pay_price}}</span>元</td>
 			<td>{{order.delivery_time.replace("T"," ").substr(0,16)}}</td>
 			<td>
 			<ul>

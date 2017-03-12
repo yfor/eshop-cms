@@ -218,6 +218,24 @@ define(["angular","ui-router"],function(angular,uirouter){
 							return defered.promise;
 						}
 					}
+				});		
+		$stateProvider.state("info",{
+					url:"/info",
+					templateUrl:"./business/home/info/info.html",
+					controller:"info.ctrl",
+					resolve:{
+						deps:function($q,$rootScope){
+							var defered = $q.defer();
+							var dependiences = ["./business/home/info/info"];
+							require(dependiences,function(ctrl){
+								$rootScope.$apply(function(){
+									$controllerProvider.register("info.ctrl",ctrl);
+									defered.resolve();
+								});
+							});
+							return defered.promise;
+						}
+					}
 				});					
 		
 	}];
