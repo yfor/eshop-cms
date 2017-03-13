@@ -69,14 +69,16 @@ define(["amaze",
 			$scope.isNeedPro=!$scope.isNeedPro;
 		}		
 		$scope.getOrders();
-		$scope.closeOrder= function(id,$event){
+		$scope.closeOrder= function(order,$event){
+			var id=order.id;
 			$scope.tipMessageOnLeft="修改订单";
 			$event.stopPropagation()
-			var order={}
-			order.status=3;
-			os.closeOrder(id,order,$scope.users.setheaders).then(function(data){
+			var orderData={}
+			orderData.status=3;
+			os.closeOrder(id,orderData,$scope.users.setheaders).then(function(data){
 				console.log(data)
 				if(data.code===0){
+					order.status=3;
 					//$scope.getOrders();
 				}else{
 					alert(JSON.stringify(data))

@@ -12,6 +12,28 @@
         <li><a ui-sref="product" class="am-text-success"><span class="am-icon-btn am-icon-plus"></span><br/>新增产品<br/>2300</a></li>
 		</ul>
 	<form class="am-form">
+		  <fieldset>
+			<legend>订单列表</legend>
+			<div class="am-form-group">
+			<label >状态：</label>
+			</div>
+			<div class="am-form-group">
+			<select ng-disabled="isNeedPro" ng-model="queryObject.status" ng-options="x for (x, y) in  orderStatuTypeMap"></select>	
+			</div>
+			<button  ng-click="setQueryType()" class="am-btn am-btn-{{isNeedPro?'primary':'default'}}">待处理</button>
+			<div class="am-form-group">
+			<label >创建时间起止：</label>
+			</div>
+			<div class="am-form-group">
+				<input id="timeStart" size="16" type="text"  readonly class="form-datetime am-form-field">
+			</div>
+			<div class="am-form-group">
+				<input id="timeEnd" size="16" type="text"  readonly class="form-datetime am-form-field">
+			</div>
+			
+			<button  ng-click="getOrders()" class="am-btn am-btn-success">查询</button>
+			
+		</fieldset>
 	  <fieldset>
 		<legend>产品列表</legend>
 		<div class="am-g">
@@ -19,7 +41,7 @@
           <table class="am-table am-table-bd am-table-striped admin-content-table">
             <thead>
             <tr>
-              <th>ID</th><th>图片</th><th>产品名称</th><th>产品描述</th><th>库存</th><th>编辑</th><th>删除</th>
+              <th>ID</th><th>图片</th><th>产品名称</th><th>产品描述</th><th>类型</th><th>库存</th><th>编辑</th><th>删除</th>
             </tr>
             </thead>
             <tbody>
@@ -30,6 +52,8 @@
 			 </td>
 			 <td>{{product.name}}</td>
 			 <td><a >{{product.description}}</a></td> 
+			 <td><a >{{productCategories[product.category_id]}};
+			 {{productProperties[product.property]}}</a></td>
 			 <td><span class="am-badge am-badge-success">{{product.stock}}</span></td>
 
              <td>

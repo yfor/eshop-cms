@@ -35,7 +35,6 @@ define(
 		});
 		$rootScope.$on("$stateChangeSuccess",function(e,c,n){
 			setTimeout(function(){
-				debugger
 				$(".loading").hide();				
 			},10);
 

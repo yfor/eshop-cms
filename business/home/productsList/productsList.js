@@ -35,6 +35,21 @@ define(["amaze","framework/services/productService"],function (amaze,productServ
 				alert(JSON.stringify(err))
 	});	
 	}
+	$scope.productCategories=
+	{
+		1:"单品精选",
+		2:"果切",
+		3:"企业套餐",
+		4:"周边"
+	}
+
+	$scope.productProperties=
+	{
+		1:"普通商品",
+		2:"广告商品",
+		3:"团购商品",
+		4:"秒杀商品"
+	}	
 	}
 	];
 	return ctrl;

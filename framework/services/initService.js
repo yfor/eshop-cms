@@ -132,7 +132,10 @@ define(['datetimepicker',"framework/services/accountService","framework/services
 			$rootScope.number=total_count;
 			$rootScope.showTips=showTips;
 			if(isPlayMusic){
-				order_mp3.play()	
+				setTimeout(function(){
+					order_mp3.play()			
+				},1000);
+					
 			}
 		}			
 		}
