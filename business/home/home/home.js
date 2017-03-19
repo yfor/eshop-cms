@@ -66,15 +66,15 @@ define(["amaze","framework/services/homeService","framework/services/productServ
 			"data": [
 				{
 					"category": 1,
-					"products": $scope.productList_danpin_ids
+					"products": !$scope.productList_danpin_ids?[]:$scope.productList_danpin_ids
 				},
 				{
 					"category": 2,
-					"products": $scope.productList_guoqie_ids
+					"products": !$scope.productList_guoqie_ids?[]:$scope.productList_guoqie_ids
 				},
 				{
 					"category": 3,
-					"products": $scope.productList_tuangou_ids
+					"products": !$scope.productList_tuangou_ids?[]:$scope.productList_tuangou_ids
 				}
 			]
 		}
