@@ -22,9 +22,9 @@
 						<td colspan="3" style="width:440px;" class="detail_title_value">{{order.order_number}}</td>
 					</tr>
 					<tr height="50">
-						<td class="detail_title_name">订单更新时间：</td>
+						<td class="detail_title_name">订单创建时间：</td>
 						<td class="detail_title_value">
-							{{order.updated_at.replace("T"," ").substr(0,16)}}
+							{{orderCurrent.created_at|DateFormat}}
 						</td>
 					</tr>
 					<tr height="50">
@@ -66,7 +66,7 @@
 				<table>
 					<tbody><tr height="50">
 						<td class="detail_title_name">支付时间：</td>
-						<td colspan="3" style="width:440px;" class="detail_title_value">0003920170211160921</td>
+						<td colspan="3" style="width:440px;" class="detail_title_value">{{orderCurrent.payment_time|DateFormat}}</td>
 					</tr>
 				</tbody></table>
 			</div>

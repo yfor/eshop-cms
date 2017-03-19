@@ -58,7 +58,7 @@
 			 <td><span class="am-badge am-badge-success">{{product.stock}}</span></td>
 			 
              <td>
-			  <a ui-sref="product({ productId: {{product.id}} })" class="am-text-success">编辑</a>
+			  <a ng-href="#/product?productId={{product.id}}" class="am-text-success">编辑</a>
              </td>
 			 <td>
 				<a class="am-icon-close" ng-click = "delProduct(product.id)">

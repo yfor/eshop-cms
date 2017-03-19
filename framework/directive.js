@@ -16,7 +16,8 @@ define(["ui-router","amaze"],function(router,zmaze){
 	    return fmt;
 	}
 	mod.filter("DateFormat", function() {
-		var filterfun = function(str, sep) {
+		var filterfun = function(str) {
+			if(!str)return str;
 			return new Date(str).Format("yyyy-MM-dd hh:mm:ss");
 		};
 		return filterfun;
