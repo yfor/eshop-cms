@@ -59,10 +59,14 @@ define(["amaze","framework/services/advertService","framework/services/productSe
 		3:'productDetailsPicture'
 	}
 	$scope.advertCategories=[
-	{
-		name:"首页",
-		id:1
-	}
+		{
+			name:"首页轮播",
+			id: 1
+		},
+		{
+			name:"首页商品列表",
+			id: 2
+		}
 	]
 
 	$scope.advert={
