@@ -34,20 +34,23 @@ define(["amaze","framework/services/productService","uploadPreview"],function (a
 		3:'productDetailsPicture'
 	}
 	$scope.productCategories=[
-	{
-		name:"单品精选",
-		id:1
-	},
 		{
-		name:"果切",
-		id:2
-	},	{
-		name:"企业套餐",
-		id:3
-	},	{
-		name:"周边",
-		id:4
-	}
+			name:"单品精选",
+			id:1
+		},
+			{
+			name:"果切",
+			id:2
+		},	{
+			name:"企业套餐",
+			id:3
+		},	{
+			name:"周边",
+			id:4
+		},  {
+			name:"鲜榨果汁",
+			id:5
+		}
 	]
 	$scope.productProperties=[
 	{
